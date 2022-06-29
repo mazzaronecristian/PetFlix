@@ -3,6 +3,11 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+
+body{
+	height: auto;
+}
+
 body, input{
 	font-family: 'Poppins', Helvetica, sans-serif;
 }
@@ -123,9 +128,4 @@ body, input{
 	.menu{
 		margin: 0;
 	}
-
-	.menu .btn:nth-of-type(3){
-		display: none;
-	}
-
 }
