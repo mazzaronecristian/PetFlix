@@ -12,6 +12,16 @@ body, input{
 	font-family: 'Poppins', Helvetica, sans-serif;
 }
 
+/* 
+#577590  queen blue
+
+#43aa8b  jungle green
+
+#f9844a  mango tango
+
+#455d73  KING blue (hover)
+*/
+
 .container{
 	position: relative;
 	width: 100%;
@@ -53,7 +63,7 @@ body, input{
 }
 .btn.transparent{
 	border: 2px solid #fff;
-	background: none;
+	background: #577590;
 }
 
 #SOS{
@@ -88,6 +98,36 @@ body, input{
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.forms-container{
+	display: flex;
+	flex-direction: column;
+	margin-top: 120px;
+	align-content: center;
+}
+
+.forms-container h2{
+	color: #43aa8b;
+}
+
+.forms-container button{
+	cursor:	pointer;
+}
+
+.orari{
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+.input-field{
+	background-color: #f0f0f0;
+	border: none;
+	outline: none;
+	height: 30px;
+	border-radius: 30px;
 }
 
 @media (max-width: 870px){
