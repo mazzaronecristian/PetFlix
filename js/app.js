@@ -41,8 +41,9 @@ closeModalButtons.forEach(button =>{
 
 addFieldButton.forEach(button =>{
 	button.addEventListener('click', ()=>{
-		let html = 	"<div class=\"time\" id=\"time\"><input id=\"time-field\" type=\"time\" value=\"16:30\"><button onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>"
-		button.insertAdjacentHTML("beforebegin", html)
+		let html = 	"<div id=\"time\"><input id=\"time-field\" type=\"time\" value=\"16:30\"><button id=\"prova\"onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
+		const object = document.getElementById('newFoodTimes');
+		object.insertAdjacentHTML("beforeend", html);
 	})
 })
 function openModal(modal){
@@ -50,14 +51,25 @@ function openModal(modal){
 
 	modal.classList.add('active')
 	overlay.classList.add('active')
-
 }
 
 function closeModal(modal){
 	if (modal == null) return
 
+	//salva nuovi orari	
+	var form = document.getElementById("newFoodTimes");
+	var text = "";
+	var i=0;
+	while(i<form.length){
+		if (form.elements[i].getAttribute("id") == "time-field")
+			text += "<li>" + form.elements[i].value+"</li>";
+		i++;
+	}
+
 	modal.classList.remove('active')
 	overlay.classList.remove('active')
+	document.getElementById('foodTimes').innerHTML = text;
+
 }
 
 function closeField(button){

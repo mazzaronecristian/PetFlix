@@ -143,11 +143,25 @@ body{
 	height: 30px;
 	border-radius: 30px;
 }
+
+.erogazioneAcqua{
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.erogazioneAcqua span{
+	flex-shrink: 10;
+}
 .switch {
+	margin-top: 3px;
+	margin-left: 10px;
 	position: relative;
 	display: inline-block;
-	width: 60px;
-	height: 34px;
+	width: 30px;
+	height: 17px;
 }
 
 .switch input { 
@@ -157,7 +171,7 @@ body{
 }
 
 .slider {
-	border-radius: 34px;
+	border-radius: 17px;
 	position: absolute;
 	cursor: pointer;
 	top: 0;
@@ -173,10 +187,10 @@ body{
 	border-radius: 50%;
 	position: absolute;
 	content: "";
-	height: 26px;
-	width: 26px;
-	left: 4px;
-	bottom: 4px;
+	height: 13px;
+	width: 13px;
+	left: 2px;
+	bottom: 2px;
 	background-color: white;
 	-webkit-transition: .4s;
 	transition: .4s;
@@ -191,9 +205,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-	-webkit-transform: translateX(26px);
-	-ms-transform: translateX(26px);
-	transform: translateX(26px);
+	-webkit-transform: translateX(13px);
+	-ms-transform: translateX(13px);
+	transform: translateX(13px);
 }
 
 /* END SECTION RULES*/

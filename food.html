@@ -30,11 +30,10 @@
 				<!-- cibo-->
 				<div class="orari">
 					<h2>Orari Cibo</h2>
-					<ul>
-						<li>12:00</li>
-						<li>18:00</li>
+					<ul id="foodTimes">
+						
 					</ul>
-
+					
 					<!--pop-up-->
 					<button data-modal-target="#modal" class="edit"><i class="fa-solid fa-pencil"></i></button>
 					<div class="modal" id="modal">
@@ -43,28 +42,33 @@
 							<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>
 						</div>
 						<div class="modal-body">
+							<form id="newFoodTimes">
+				
+							</form>
 							<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>		
 						</div>
 					</div> 
-					<div id="overlay"></div>
+
 				</div>
 
 				<!--acqua-->
 
 				<div>
 					<h2>Erogazione Acqua</h2>
-					<span>Erogazione automatica acqua quando l'animale è vicino</span>
-					<label class="switch">
-					  	<input type="checkbox">
-					 	<span class="slider"></span>
-					</label>
+					<div class="erogazioneAcqua">
+						<span>Erogazione automatica acqua quando l'animale è vicino</span>
+						<label class="switch">
+						  	<input type="checkbox">
+						 	<span class="slider"></span>
+						</label>
+					</div>
 				</div>
 
 			</div>
 
 		</section>
 
-		
+		<div id="overlay"></div>
 
 	</div>
 
