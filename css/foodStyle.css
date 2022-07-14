@@ -14,9 +14,6 @@
 	font-family: 'Poppins', Helvetica, sans-serif;
 }
 
-body{
-	height: 100000px;
-}
 
 .btn.transparent{
 	border: 2px solid #fff;
@@ -66,6 +63,7 @@ body{
 	right: 48%;
 	transform: translate(100%,-50%);
 	border-radius: 50%;
+	z-index: 20;
 }
 
 .menu-container{
@@ -74,6 +72,7 @@ body{
     width: 50%;
     height: auto;
     right: 0;
+    z-index: 21;
 }
 
 .menu-container img{
@@ -111,9 +110,12 @@ body{
 .info{
 	position: absolute;
 	left: 15%;
+	right: 50%;
+	overflow: hidden;
+	height: auto;
 }
 
-.forms-container{
+.food-container{
 	display: flex;
 	flex-direction: column;
 	margin-top: 120px;
@@ -122,16 +124,16 @@ body{
 	min-height: 300px;
 }
 
-.forms-container h2{
+.food-container h2{
 	color: var(--jungleGreen);
 }
 
-.forms-container ul{
+.food-container ul{
 	list-style: none;
 	padding-left: 10px;
 }
 
-.forms-container li{
+.food-container li{
 	padding: 5px 0;
 }
 
@@ -318,16 +320,20 @@ input[value]{
 
 @media (max-width: 870px){
 	.container:before{
-		width: 1800px;
+		width: 2300px;
 		height: 1800px;
-		position: fixed;
 		left: 50%;
-		bottom: 80%;			
+		bottom: 90%;			
 		transform:  translateX(-50%);
 		top: initial;
-		right: initialx;
+		right: initial;
 	}
 	
+	.info{
+		left: 50%;
+		transform: translateX(-50%);
+		width: 80%;
+	}
 	.menu-container{
 		width: 100%;
 		top: 10px;
@@ -352,6 +358,10 @@ input[value]{
 @media (max-width: 570px){
 	.menu{
 		margin: 0;
+	}
+	.container:before{
+		width: 2000px;
+		height: 1300px;
 	}
 }
 

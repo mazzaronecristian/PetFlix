@@ -41,11 +41,12 @@ closeModalButtons.forEach(button =>{
 
 addFieldButton.forEach(button =>{
 	button.addEventListener('click', ()=>{
-		let html = 	"<div id=\"time\"><input id=\"time-field\" type=\"time\" value=\"16:30\"><button id=\"prova\"onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
+		let html = 	"<div id=\"time\"><input id=\"time-field\" type=\"time\" value=\"00:00\"><button id=\"prova\"onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
 		const object = document.getElementById('newFoodTimes');
 		object.insertAdjacentHTML("beforeend", html);
 	})
 })
+
 function openModal(modal){
 	if (modal == null) return 
 
@@ -69,13 +70,11 @@ function closeModal(modal){
 	modal.classList.remove('active')
 	overlay.classList.remove('active')
 	document.getElementById('foodTimes').innerHTML = text;
-
 }
 
 function closeField(button){
 	let field = button.closest('#time')
 	field.remove()
 }
-
 
 //END SCRIPT FOR POP-UP
