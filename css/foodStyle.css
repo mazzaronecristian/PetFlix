@@ -5,6 +5,10 @@
 	--kingBlue: #455d73;
 }
 
+.avoid-clicks{
+	pointer-events: none;
+}
+
 /* START GENERAL RULES*/
 
 *{
@@ -14,6 +18,21 @@
 	font-family: 'Poppins', Helvetica, sans-serif;
 }
 
+input{
+	margin-bottom: 5px;
+	margin-right: 10px;
+	background-color: #f0f0f0;
+	outline: none;
+	border: none;
+	width: 120px;
+	height: 40px;
+	border-radius: 40px;
+}
+
+input[value], input[placeholder]{
+	padding:0 10px;
+	font-size: 16px;
+}
 
 .btn.transparent{
 	border: 2px solid #fff;
@@ -63,7 +82,7 @@
 	right: 48%;
 	transform: translate(100%,-50%);
 	border-radius: 50%;
-	z-index: 20;
+	z-index: 10;
 }
 
 .menu-container{
@@ -72,7 +91,7 @@
     width: 50%;
     height: auto;
     right: 0;
-    z-index: 21;
+    z-index: 11;
 }
 
 .menu-container img{
@@ -88,7 +107,7 @@
 	-o-transform: scaleX(-1);
 }
 
-#SOS{
+#sos-btn{
 	background-color: var(--mangoTango);
 	transition: .5s;
 	font-size: 16px;
@@ -107,15 +126,26 @@
 
 /* START SECTION RULES*/
 
-.info{
-	position: absolute;
-	left: 15%;
+.info-active{
+	left: 15% !important;
 	right: 50%;
 	overflow: hidden;
-	height: auto;
 }
 
-.food-container{
+.info-right{
+	position: absolute;
+	left: 120%;
+	height: auto;
+	transition: .4s;
+}
+
+.info-left{
+	position: absolute;
+	left: -120%;
+	height: auto;
+	transition: .4s;
+}
+.info-container{
 	display: flex;
 	flex-direction: column;
 	margin-top: 120px;
@@ -124,26 +154,17 @@
 	min-height: 300px;
 }
 
-.food-container h2{
+.info-container h2{
 	color: var(--jungleGreen);
 }
 
-.food-container ul{
+.info-container ul{
 	list-style: none;
 	padding-left: 10px;
 }
 
-.food-container li{
+.info-container li{
 	padding: 5px 0;
-}
-
-
-.input-field{
-	background-color: #f0f0f0;
-	border: none;
-	outline: none;
-	height: 30px;
-	border-radius: 30px;
 }
 
 .erogazioneAcqua{
@@ -222,18 +243,19 @@ input:checked + .slider:before {
 }
 
 .modal{
+	z-index: 20;
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%) scale(0);
 	transition: 200ms ease-in-out;
 	border-radius: 10px;
-	z-index: 10;
 	background-color: white;
 	width: 400px;
 	max-width: 80%;
 }
 .modal.active{
+	z-index: 22;
 	transform: translate(-50%, -50%) scale(1);
 }
 .modal-header{
@@ -265,6 +287,7 @@ input:checked + .slider:before {
 }
 
 #overlay{
+	z-index: 15;
 	position: fixed;
 	opacity: 0;
 	transition: 200ms ease-in-out;
@@ -281,21 +304,7 @@ input:checked + .slider:before {
 	pointer-events: all;
 }
 
-input{
-	margin-bottom: 5px;
-	margin-right: 10px;
-	background-color: #f0f0f0;
-	outline: none;
-	border: none;
-	width: 120px;
-	height: 40px;
-	border-radius: 40px;
-}
 
-input[value]{
-	padding-left: 10px;
-	font-size: 16px;
-}
 
 .edit{
 	cursor: pointer;
@@ -329,8 +338,8 @@ input[value]{
 		right: initial;
 	}
 	
-	.info{
-		left: 50%;
+	.info-active{
+		left: 50% !important;
 		transform: translateX(-50%);
 		width: 80%;
 	}

@@ -15,17 +15,17 @@
 
 		<div class="menu-container">
 			<div class="menu">
-				<button class="btn transparent">Cibo</button>
-				<button class="btn transparent">Salute</button>
-				<button class="btn" id="SOS">SOS</button>
+				<button id="food-btn" class="btn transparent">Cibo</button>
+				<button id="health-btn" class="btn transparent">Salute</button>
+				<button id="sos-btn" class="btn">SOS</button>
 			</div>
 
 			<img src="images/register.svg">
 		</div>
 
-		<section id="foodInformation" class="info">
+		<section id="food-info" class="info-left info-active">
 
-			<div class="food-container">
+			<div class="info-container">
 
 				<!-- cibo-->
 				<div class="orari">
@@ -56,7 +56,7 @@
 				<div>
 					<h2>Erogazione Acqua</h2>
 					<div class="erogazioneAcqua">
-						<span>Erogazione automatica acqua quando l'animale è vicino</span>
+						<span>Eroga l'acqua se il cane è vicino</span>
 						<label class="switch">
 						  	<input type="checkbox">
 						 	<span class="slider"></span>
@@ -67,6 +67,26 @@
 			</div>
 			
 		</section>
+
+		<section id="health-info" class="info-right">
+			<div class="info-container">
+				<div class="peso">
+					<h2>Controllo peso</h2>
+					<form>
+						<label>inserisci peso: </label>
+						<input type="text" name="peso" placeholder="kg">
+						<input type="date" name="data">
+					</form>
+				</div>
+				<div class="plot-peso">
+					<h2>Grafico</h2>
+				</div>
+				<div class="uscite">
+					<h2>Programma uscite</h2>
+				</div>
+			</div>
+		</section>
+
 
 		<div id="overlay"></div>
 

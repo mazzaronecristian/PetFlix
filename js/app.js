@@ -41,7 +41,7 @@ closeModalButtons.forEach(button =>{
 
 addFieldButton.forEach(button =>{
 	button.addEventListener('click', ()=>{
-		let html = 	"<div id=\"time\"><input id=\"time-field\" type=\"time\" value=\"00:00\"><button id=\"prova\"onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
+		let html = 	"<div id=\"time\"><input id=\"time-field\" type=\"time\" value=\"00:00\"><button onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
 		const object = document.getElementById('newFoodTimes');
 		object.insertAdjacentHTML("beforeend", html);
 	})
@@ -78,3 +78,24 @@ function closeField(button){
 }
 
 //END SCRIPT FOR POP-UP
+
+	//START NAVBAR SCRIP
+	const food_btn = document.querySelector("#food-btn");
+	const health_btn = document.querySelector("#health-btn");
+	const health_info = document.querySelector("#health-info");
+	const food_info = document.querySelector("#food-info")
+
+	health_btn.addEventListener('click', ()=>{
+		health_info.classList.add("info-active");
+		health_info.classList.remove("avoid-clicks");
+		food_info.classList.remove("info-active");
+		food_info.classList.add("avoid-clicks");
+	})
+
+	food_btn.addEventListener('click', ()=>{
+		food_info.classList.add("info-active");
+		food_info.classList.remove("avoid-clicks");
+		health_info.classList.remove("info-active");
+		health_info.classList.add("avoid-clicks");
+})
+//END NAVBAR SCRIPT
