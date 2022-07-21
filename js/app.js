@@ -58,6 +58,8 @@ function closeModal(modal){
 	if (modal == null) return
 
 	//salva nuovi orari	
+	//var form = modal.getElementById("nesFoodTimes");
+
 	var form = document.getElementById("newFoodTimes");
 	var text = "";
 	var i=0;
@@ -67,9 +69,10 @@ function closeModal(modal){
 		i++;
 	}
 
-	modal.classList.remove('active')
-	overlay.classList.remove('active')
-	document.getElementById('foodTimes').innerHTML = text;
+	modal.classList.remove('active');
+	overlay.classList.remove('active');
+	const destination = document.querySelector(form.dataset.formTarget)
+	destination.innerHTML = text;
 }
 
 function closeField(button){
@@ -78,6 +81,9 @@ function closeField(button){
 }
 
 //END SCRIPT FOR POP-UP
+
+
+
 
 //START NAVBAR SCRIP
 	const food_btn = document.getElementById("food-btn");

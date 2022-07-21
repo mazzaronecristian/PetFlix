@@ -148,13 +148,18 @@ form{
 	height: auto;
 	transition: .4s;
 }
+
 .info-container{
 	display: flex;
 	flex-direction: column;
 	margin-top: 120px;
 	align-items: flex-start;
-	justify-content: space-around;
+	justify-content: flex-start;
 	min-height: 300px;
+}
+
+.info-container div.orari, .info-container div.acqua{
+	margin-bottom: 20px;
 }
 
 .info-container h2{
@@ -236,8 +241,18 @@ input:checked + .slider:before {
 	transform: translateX(13px);
 }
 
-#plotPeso{
-	width: 700px;
+.peso input{
+	width: 60px;
+	height: 30px;
+}
+
+.peso input:nth-of-type(2){
+	width: 120px;
+}
+
+canvas#plotPeso {
+    width: 100% !important;
+    height: 300px !important;
 }
 /* END SECTION RULES*/
 
@@ -325,14 +340,6 @@ input:checked + .slider:before {
 	padding: 5px 50px;
 }
 
-.peso input{
-	width: 60px;
-	height: 30px;
-}
-
-.peso input:nth-of-type(2){
-	width: 120px;
-}
 
 /* END POP-UP RULES*/
 
@@ -341,10 +348,10 @@ input:checked + .slider:before {
 
 @media (max-width: 870px){
 	.container:before{
-		width: 2300px;
+		width: 2600px;
 		height: 1800px;
 		left: 50%;
-		bottom: 90%;			
+		bottom: 88%;			
 		transform:  translateX(-50%);
 		top: initial;
 		right: initial;
@@ -375,10 +382,9 @@ input:checked + .slider:before {
 		font-size: 0.7rem;
 	}
 
-	#plotPeso{
-		width: 100%;
-	}
 }
+
+@media
 
 @media (max-width: 570px){
 	.menu{

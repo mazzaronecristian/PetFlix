@@ -5,11 +5,11 @@
 	<link rel="stylesheet" type="text/css" href="css/foodStyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/13645b992e.js" crossorigin="anonymous"></script>
-	<script defer src="js/app.js" type="text/javascript"></script>
-	<script
+		<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 	</script>
+	<script src="https://kit.fontawesome.com/13645b992e.js" crossorigin="anonymous"></script>
+	<script defer src="js/app.js" type="text/javascript"></script>
 	<title>food</title>
 </head>
 <body>
@@ -36,27 +36,13 @@
 					<ul id="foodTimes">
 						
 					</ul>
+					<button data-modal-target="#modalFood" class="edit"><i class="fa-solid fa-pencil"></i></button>
 					
-					<!--pop-up-->
-					<button data-modal-target="#modal" class="edit"><i class="fa-solid fa-pencil"></i></button>
-					<div class="modal" id="modal">
-						<div class="modal-header">
-							<div class="title">Modifica gli orari</div>
-							<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>
-						</div>
-						<div class="modal-body">
-							<form id="newFoodTimes">
-				
-							</form>
-							<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>		
-						</div>
-					</div> 
-
 				</div>
 
 				<!--acqua-->
 
-				<div>
+				<div class="acqua">
 					<h2>Erogazione Acqua</h2>
 					<div class="erogazioneAcqua">
 						<span>Eroga l'acqua se il cane è vicino</span>
@@ -80,19 +66,41 @@
 						<input id="peso" type="text" name="peso" placeholder="kg">
 						<input id="data" type="date" name="data">
 					</form>
-					<button onclick='pickAndPlotValues("peso", "data")' class="edit"><i class="fa-solid fa-file-import"></i></button>
+					<button onclick='pickAndPlotValues("peso", "data")' class="edit">
+						<i class="fa-solid fa-file-import"></i>
+					</button>
 				</div>
 				<div class="plot-peso">
 					<h2>Grafico</h2>
-					<canvas id="plotPeso"></canvas>
+					<canvas id="plotPeso" style="width:100%;max-width:700px"></canvas>
 				</div>
 				<div class="uscite">
 					<h2>Programma uscite</h2>
+					<ul id="outTimes">
+						
+					</ul>
+					<button data-modal-target="#modalFood" class="edit"><i class="fa-solid fa-pencil"></i></button>
 				</div>
 			</div>
 		</section>
 
+		<!--pop-up orari cibo-->
+		<div class="modal" id="modalFood">
+			<div class="modal-header">
+				<div class="title">Modifica gli orari</div>
+				<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>
+			</div>
+			<div class="modal-body">
+	 		 	<form data-form-target="#foodTimes" id="newFoodTimes">
+	
+				</form>
+				<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>		
+			</div>
+		</div> 
+
 		<div id="overlay"></div>
+
+
 	</div>
 
 </body>
