@@ -306,7 +306,7 @@ canvas#plotPeso {
 	align-items: flex-start;
 }
 
-#overlay{
+.overlay{
 	position: fixed;
 	opacity: 0;
 	transition: 200ms ease-in-out;
@@ -318,7 +318,7 @@ canvas#plotPeso {
 	pointer-events: none;
 }
 
-#overlay.active{
+.overlay.active{
 	z-index: 15;
 	opacity: 1;
 	pointer-events: all;

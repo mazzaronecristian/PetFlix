@@ -11,75 +11,86 @@ sign_in_btn.addEventListener('click', () => {
 });*/
 
 //START POP-UP SCRIPT
+(function($){
+	console.log("jQuery: " +$);
+	$.fn.todo = function(){
 
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('overlay')
+		return this.each(function(i, obj) {
+			let $this = $(this);
+			load_pop_up($this);
+			let $openButton = $('.open', $this);//$this = .selezioneOrari
+			let $addButton = $('.add', $this);
+			let $closeButton = $('.close-button', $this);
+			let $overlay = $('.overlay', $this);
 
-const addFieldButton = document.querySelectorAll('[data-add-time-field]')
+			$openButton.on('click', function(){
+				$this.find('.modal').addClass('active');
+				$this.find('.overlay').addClass('active');
+			});
 
-openModalButtons.forEach(button =>{
-	button.addEventListener('click', ()=>{
-		const modal = document.querySelector(button.dataset.modalTarget)
-		openModal(modal)
-	})
-})
+			$addButton.on('click', function(){
+				let $field = $this.find('.newTimes');
+				let html = 	"<div class=\"time\"><input class=\"time-field\" type=\"time\" value=\"00:00\"><button onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
 
-overlay.addEventListener('click', ()=>{
-	const modals = document.querySelectorAll('.modal.active')
-	modals.forEach(modal => {
-		closeModal(modal)
-	})
-})
+				$field.append(html);
+			});
 
-closeModalButtons.forEach(button =>{
-	button.addEventListener('click', ()=>{
-		const modal = button.closest('.modal')
-		closeModal(modal)
-	})
-})
+			$closeButton.on('click', function(){
+				close_pop_up($this);
+			});
 
-addFieldButton.forEach(button =>{
-	button.addEventListener('click', ()=>{
-		let html = 	"<div id=\"time\"><input id=\"time-field\" type=\"time\" value=\"00:00\"><button onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
-		const object = document.getElementById('newFoodTimes');
-		object.insertAdjacentHTML("beforeend", html);
-	})
-})
+			$overlay.on('click', function(){
+				close_pop_up($this);
+			});
 
-function openModal(modal){
-	if (modal == null) return 
+		});
 
-	modal.classList.add('active')
-	overlay.classList.add('active')
-}
+		function load_pop_up($el) {
+			let html = '<button data-modal-target="#modalFood" class="edit open"><i class="fa-solid fa-pencil"></i></button>';
+			html += '<div class="modal" id="modalFood">'+
+						'<div class="modal-header">'+
+							'<div class="title">Modifica gli orari</div>'+
+							'<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>'+
+						'</div>'+
+						'<div class="modal-body">'+
+		 					'<form class="newTimes">'+
 
-function closeModal(modal){
-	if (modal == null) return
+							'</form>'+
+							'<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>'+		
+						'</div>'+	
+					'</div>'+ 
+					'<div class="overlay"></div>';
+			$el.append(html);
+		}	
 
-	//salva nuovi orari	
-	//var form = modal.getElementById("nesFoodTimes");
+		function close_pop_up($el){
+			$el.find('.modal').removeClass('active');
+			$el.find('.overlay').removeClass('active');
+			let $form = $el.find('.newTimes');
+			var input = $('input.time-field', $form);
+			let html = '';
+			
+			for (var i = 0; i < input.length; i++) {
+				html += '<li>'+$form.find(input[i]).val()+'</li>';
+			}
 
-	var form = document.getElementById("newFoodTimes");
-	var text = "";
-	var i=0;
-	while(i<form.length){
-		if (form.elements[i].getAttribute("id") == "time-field")
-			text += "<li>" + form.elements[i].value+"</li>";
-		i++;
+			let $times = $el.find('ul.times');
+			$times.append(html);
+
+		}
+
 	}
+})(jQuery);
 
-	modal.classList.remove('active');
-	overlay.classList.remove('active');
-	const destination = document.querySelector(form.dataset.formTarget)
-	destination.innerHTML = text;
-}
+jQuery(document).ready(function(){
+	console.log("READY");
+	jQuery(".sezioneOrari").todo();
+});
 
 function closeField(button){
-	let field = button.closest('#time')
+	let field = button.closest('.time')
 	field.remove()
 }
-
 //END SCRIPT FOR POP-UP
 
 

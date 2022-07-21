@@ -9,6 +9,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 	</script>
 	<script src="https://kit.fontawesome.com/13645b992e.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script defer src="js/app.js" type="text/javascript"></script>
 	<title>food</title>
 </head>
@@ -31,13 +32,11 @@
 			<div class="info-container">
 
 				<!-- cibo-->
-				<div class="orari">
+				<div class="orari sezioneOrari">
 					<h2>Orari Cibo</h2>
-					<ul id="foodTimes">
+					<ul class="times">
 						
 					</ul>
-					<button data-modal-target="#modalFood" class="edit"><i class="fa-solid fa-pencil"></i></button>
-					
 				</div>
 
 				<!--acqua-->
@@ -74,32 +73,15 @@
 					<h2>Grafico</h2>
 					<canvas id="plotPeso" style="width:100%;max-width:700px"></canvas>
 				</div>
-				<div class="uscite">
+
+				<div class="uscite sezioneOrari">
 					<h2>Programma uscite</h2>
-					<ul id="outTimes">
+					<ul class="times">
 						
 					</ul>
-					<button data-modal-target="#modalFood" class="edit"><i class="fa-solid fa-pencil"></i></button>
 				</div>
 			</div>
 		</section>
-
-		<!--pop-up orari cibo-->
-		<div class="modal" id="modalFood">
-			<div class="modal-header">
-				<div class="title">Modifica gli orari</div>
-				<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>
-			</div>
-			<div class="modal-body">
-	 		 	<form data-form-target="#foodTimes" id="newFoodTimes">
-	
-				</form>
-				<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>		
-			</div>
-		</div> 
-
-		<div id="overlay"></div>
-
 
 	</div>
 
