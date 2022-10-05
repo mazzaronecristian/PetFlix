@@ -1,5 +1,9 @@
 (function($){
 	$.fn.times = function(options){
+		var defaults = {
+			serverURL : "example.com/server_page_url",
+		}
+		options = $.extend(defaults, options);
 
 		return this.each(function(i, obj) {
 			let $this = $(this);
@@ -55,14 +59,35 @@
 			let $form = $el.find('.newTimes');
 			var input = $('input.time-field', $form);
 			let html = '';
-			
+
+			//invio del contenuto del popup al db
+			sendTimes($form);
+
 			for (var i = 0; i < input.length; i++) {
 				html += '<li>'+$form.find(input[i]).val()+'</li>';
 			}
 
 			let $times = $el.find('ul.times');
 			$times.append(html);
+		}
 
+		function sendTimes($form){
+			var $text = $form.find(".time-field");
+			var text = $text.val();
+			var type = "pasto";
+			console.log(text);
+
+			var request = $.ajax({
+				url: options.serverURL,
+				type: "POST",
+				data: {"text" : text, "type": type, "action" : "insert"},
+				dataType: "json",
+			});
+
+			request.done(function(data) {
+				console.log("REQUEST.DONE: " + data)
+				handleInsert(data, $this);
+			});
 		}
 
 	}
