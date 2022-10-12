@@ -72,20 +72,27 @@
 			}
 
 			function sendTimes($form){
-				var $text = $form.find(".time-field");
-				var text = $text.val();
-				var type = "pasto";
+				$form.find(".time-field").each(function(){
+					var time = $(this).val();
+					var request = $.ajax({
+						url: options.serverURL,
+						type: "POST",
+						data: {
+							"time" : time, 
+							"flag" : 1,
+							"action" : "insert"
+						},
+						dataType: "json"
+					});
 
-				var request = $.ajax({
-					url: options.serverURL,
-					type: "POST",
-					data: {"text" : text, "action" : "insert"},
-					dataType: "json",
-				});
+					request.done(function(data) {
+						console.log("DONE");
+						//handleInsert(data, $this);
+					});
+					request.fail(function(){
+						console.log("fail");
+					});
 
-				request.done(function(data) {
-					console.log("REQUEST.DONE: " + data)
-					handleInsert(data, $this);
 				});
 			}
 		});
