@@ -95,6 +95,8 @@
 
 				});
 			}
+
+			//TODO loadTime() per caricare i dati sul sito dal db
 		});
 	}
 })(jQuery);

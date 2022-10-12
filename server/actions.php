@@ -60,9 +60,7 @@
 
     	$response = array('times' => $todos, 'type' => 'insert');
 
-    	echo json_encode($response);	
-
-
+    	echo json_encode($response);
 	}
 
 ?>
