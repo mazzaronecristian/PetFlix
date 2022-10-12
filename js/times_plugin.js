@@ -33,8 +33,7 @@
 				close_pop_up($this);
 			});
 
-		
-
+	
 			function load_pop_up($el) {
 				let html = '<button data-modal-target="#modalFood" class="edit open"><i class="fa-solid fa-pencil"></i></button>';
 				html += '<div class="modal" id="modalFood">'+
@@ -87,7 +86,7 @@
 
 					request.done(function(data) {
 						console.log("DONE");
-						//handleInsert(data, $this);
+						//TODO handleInsert(data, $this) per scrivere gli orari dal popup all'elenco sulla pagina
 					});
 					request.fail(function(){
 						console.log("fail");
@@ -96,11 +95,14 @@
 				});
 			}
 
+			//TODO spostare funzioni fuori dal return
 			//TODO loadTime() per caricare i dati sul sito dal db
+			//TODO ControlFlag per dividere gli orari in pasti e uscite
 		});
 	}
 })(jQuery);
 
+//TODO modificare funzione closeField() e scriverla con jQuery
 function closeField(button){
 	let field = button.closest('.time')
 	field.remove()
