@@ -33,72 +33,73 @@
 				close_pop_up($this);
 			});
 
-	
-			function load_pop_up($el) {
-				let html = '<button data-modal-target="#modalFood" class="edit open"><i class="fa-solid fa-pencil"></i></button>';
-				html += '<div class="modal" id="modalFood">'+
-							'<div class="modal-header">'+
-								'<div class="title">Modifica gli orari</div>'+
-								'<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>'+
-							'</div>'+
-							'<div class="modal-body">'+
-			 					'<form class="newTimes">'+
-
-								'</form>'+
-								'<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>'+		
-							'</div>'+	
-						'</div>'+ 
-						'<div class="overlay"></div>';
-				$el.append(html);
-			}	
-
-			function close_pop_up($el){
-				$el.find('.modal').removeClass('active');
-				$el.find('.overlay').removeClass('active');
-				let $form = $el.find('.newTimes');
-				var input = $('input.time-field', $form);
-				let html = '';
-
-				//invio del contenuto del popup al db
-				sendTimes($form);
-
-				for (var i = 0; i < input.length; i++) {
-					html += '<li>'+$form.find(input[i]).val()+'</li>';
-				}
-
-				let $times = $el.find('ul.times');
-				$times.append(html);
-			}
-
-			function sendTimes($form){
-				$form.find(".time-field").each(function(){
-					var time = $(this).val();
-					var request = $.ajax({
-						url: options.serverURL,
-						type: "POST",
-						data: {
-							"time" : time, 
-							"flag" : 1,
-							"action" : "insert"
-						},
-						dataType: "json"
-					});
-
-					request.done(function(data) {
-						console.log("DONE");
-						//TODO handleInsert(data, $this) per scrivere gli orari dal popup all'elenco sulla pagina
-					});
-					request.fail(function(){
-						console.log("fail");
-					});
-
-				});
-			}
-
-			//TODO spostare funzioni fuori dal return
 			//TODO loadTime() per caricare i dati sul sito dal db
 			//TODO ControlFlag per dividere gli orari in pasti e uscite
 		});
+
+		//inizio funzioni per interagire col db
+		function sendTimes($form){
+			$form.find(".time-field").each(function(){
+				var time = $(this).val();
+				var request = $.ajax({
+					url: options.serverURL,
+					type: "POST",
+					data: {
+						"time" : time, 
+						"flag" : 1,
+						"action" : "insert"
+					},
+					dataType: "json"
+				});
+
+				request.done(function(data) {
+					console.log("DONE");
+					//TODO handleInsert(data, $this) per scrivere gli orari dal popup all'elenco sulla pagina
+				});
+				request.fail(function(){
+					console.log("fail");
+				});
+
+			});
+		}
+
+		function load_pop_up($el) {
+			let html = '<button data-modal-target="#modalFood" class="edit open"><i class="fa-solid fa-pencil"></i></button>';
+			html += '<div class="modal" id="modalFood">'+
+						'<div class="modal-header">'+
+							'<div class="title">Modifica gli orari</div>'+
+							'<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>'+
+						'</div>'+
+						'<div class="modal-body">'+
+		 					'<form class="newTimes">'+
+
+							'</form>'+
+							'<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>'+		
+						'</div>'+	
+					'</div>'+ 
+					'<div class="overlay"></div>';
+			$el.append(html);
+		}	
+
+		function close_pop_up($el){
+			$el.find('.modal').removeClass('active');
+			$el.find('.overlay').removeClass('active');
+			let $form = $el.find('.newTimes');
+			var input = $('input.time-field', $form);
+			let html = '';
+
+			//invio del contenuto del popup al db
+			sendTimes($form);
+
+			for (var i = 0; i < input.length; i++) {
+				html += '<li>'+$form.find(input[i]).val()+'</li>';
+			}
+
+			let $times = $el.find('ul.times');
+			$times.append(html);
+		}
+
+
 	}
 })(jQuery);
 

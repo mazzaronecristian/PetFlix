@@ -1,3 +1,6 @@
+//START SERVER CONFIGURATION 
+
+
 //START NAVBAR SCRIP
 	const food_btn = document.getElementById("food-btn");
 	const health_btn = document.getElementById("health-btn");
