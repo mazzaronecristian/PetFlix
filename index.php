@@ -1,4 +1,3 @@
-<!-- TODO refactor per cambiare nome da food.html a index.html-->
 <!DOCTYPE html>
 <html>
 <head>
