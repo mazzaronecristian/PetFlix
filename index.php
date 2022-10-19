@@ -34,7 +34,7 @@
 			<div class="info-container">
 
 				<!-- cibo-->
-				<div class="orari sezioneOrari">
+				<div class="food sezioneOrari">
 					<h2>Orari Cibo</h2>
 					<ul class="times">
 						
@@ -76,7 +76,7 @@
 					<canvas id="plotPeso" style="width:100%;max-width:700px"></canvas>
 				</div>
 
-				<div class="uscite sezioneOrari">
+				<div class="walk sezioneOrari">
 					<h2>Programma uscite</h2>
 					<ul class="times">
 						

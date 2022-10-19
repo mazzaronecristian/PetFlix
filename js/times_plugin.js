@@ -39,6 +39,10 @@
 
 		//inizio funzioni per interagire col db
 		function sendTimes($form){
+			var type = $form.parent().attr("id").slice(5);
+			var flag = null;
+			if (type=="food") flag = 0;
+			if (type=="walk") flag = 1
 			$form.find(".time-field").each(function(){
 				var time = $(this).val();
 				var request = $.ajax({
@@ -46,7 +50,7 @@
 					type: "POST",
 					data: {
 						"time" : time, 
-						"flag" : 1,
+						"flag" : flag,
 						"action" : "insert"
 					},
 					dataType: "json"
@@ -64,13 +68,16 @@
 		}
 
 		function load_pop_up($el) {
+			var classList = $el.attr("class");
+			var classArr = classList.split(" ");
+			console.log(classArr[0]);
 			let html = '<button data-modal-target="#modalFood" class="edit open"><i class="fa-solid fa-pencil"></i></button>';
-			html += '<div class="modal" id="modalFood">'+
+			html += '<div class="modal">'+
 						'<div class="modal-header">'+
 							'<div class="title">Modifica gli orari</div>'+
 							'<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>'+
 						'</div>'+
-						'<div class="modal-body">'+
+						'<div class="modal-body" id="modal'+classArr[0]+'">'+
 		 					'<form class="newTimes">'+
 
 							'</form>'+

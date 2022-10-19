@@ -35,7 +35,7 @@
 
 		$flag = $_POST['flag'];
 
-		$query_string = "SELECT * FROM orari WHERE time= '".htmlspecialchars($time)."'";
+		$query_string = "SELECT * FROM orari WHERE controlFlag=$flag AND time= '".htmlspecialchars($time)."'";
 		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
 		$result = $mysqli->query($query_string);
 		$row = $result->fetch_array(MYSQLI_ASSOC);
