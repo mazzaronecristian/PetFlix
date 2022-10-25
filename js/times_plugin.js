@@ -34,7 +34,6 @@
 			});
 
 			//TODO loadTime() per caricare i dati sul sito dal db
-			//TODO ControlFlag per dividere gli orari in pasti e uscite
 		});
 
 		//inizio funzioni per interagire col db
