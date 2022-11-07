@@ -57,7 +57,7 @@
 
 				request.done(function(data) {
 					console.log("DONE");
-					handleInsert($(this), $el.find('ul.times'));
+					handleInsert(time, $el.find('ul.times'));
 					//TODO handleInsert(data, $this) per scrivere gli orari dal popup all'elenco sulla pagina
 				});
 				request.fail(function(){
@@ -67,12 +67,9 @@
 			});
 		}
 
-		function handleInsert($el, $position){
+		function handleInsert(time, $position){
 			//$position = $el.find('ul.times');
-			var times = $el.val();
-
-			$position.append("<li>"+times+"</li>");
-		
+			$position.append("<li>"+time+"</li>");
 		}
 
 		function loadTimes($el){
