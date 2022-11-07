@@ -32,13 +32,7 @@
 			$overlay.on('click', function(){
 				close_pop_up($this);
 			});
-
-<<<<<<< HEAD
 			loadTimes($this);
-
-=======
-			//TODO loadTime() per caricare i dati sul sito dal db
->>>>>>> 95ae0c13116fbb371300a3b6a11ee45f1126fb5e
 		});
 
 		//inizio funzioni per interagire col db
