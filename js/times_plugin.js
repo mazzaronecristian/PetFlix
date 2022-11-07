@@ -38,7 +38,8 @@
 		});
 
 		//inizio funzioni per interagire col db
-		function sendTimes($form){
+		function sendTimes($el){
+			$form = $el.find(".newTimes");
 			var type = $form.parent().attr("id").slice(5);
 			var flag = null;
 			if (type=="food") flag = 0;
@@ -58,6 +59,7 @@
 
 				request.done(function(data) {
 					console.log("DONE");
+					handleInsert($(this), $el.find('ul.times'));
 					//TODO handleInsert(data, $this) per scrivere gli orari dal popup all'elenco sulla pagina
 				});
 				request.fail(function(){
@@ -65,6 +67,14 @@
 				});
 
 			});
+		}
+
+		function handleInsert($el, $position){
+			//$position = $el.find('ul.times');
+			var times = $el.val();
+
+			$position.append("<li>"+times+"</li>");
+		
 		}
 
 		function loadTimes($el){
@@ -128,8 +138,7 @@
 			let html = '';
 
 			//invio del contenuto del popup al db
-			sendTimes($form);
-
+			sendTimes($el);
 			for (var i = 0; i < input.length; i++) {
 				html += '<li>'+$form.find(input[i]).val()+'</li>';
 			}

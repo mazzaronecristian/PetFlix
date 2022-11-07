@@ -62,29 +62,29 @@
 		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
 		$result = $mysqli->query($query_string);
 		$row = $result->fetch_array(MYSQLI_ASSOC);
+		
 		if($row == null){
 			$query_string = "INSERT INTO orari (controlFlag, time) values ($flag, '". htmlspecialchars($time) ."')";
 			$result = $mysqli->query($query_string);
 		}
 
-		$query_string = 'SELECT * FROM orari';
+		$query_string = 'SELECT * FROM orari ORDER BY time ASC';
 		$result = $mysqli->query($query_string);  
 		
-		$times = array();
+    	$times = array();	
 
-		while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-		
-			$id = $row['id'];
-  			$timesDb = $row['text'];
-			$controlFlag = $row['completed'];
-  
-			$time = array('id' => $id,'time' =>$timesDb, 'flag' => $controlFlag);
-			array_push($times, $time);
+    	while($row = $result->fetch_array(MYSQLI_ASSOC)){
+    		$row_id = $row['id'];
+    		$row_flag = $row['controlFlag'];
+    		$row_time = $row['time'];
+    	
+			$time = array('id' => $row_id,'controlFlag' =>$row_flag, 'time' => $row_time);
+			array_push($times, $time);    	
 		}
 
-    	$response = array('times' => $todos, 'type' => 'insert');
+    	$response = array('times' => $times, 'type' => 'insert');
 
-    	echo json_encode($response);
+		// encodo l'array in JSON
+		echo json_encode($response);
 	}
-
 ?>
