@@ -33,11 +33,17 @@
 				close_pop_up($this);
 			});
 
+<<<<<<< HEAD
+			loadTimes($this);
+
+=======
 			//TODO loadTime() per caricare i dati sul sito dal db
+>>>>>>> 95ae0c13116fbb371300a3b6a11ee45f1126fb5e
 		});
 
 		//inizio funzioni per interagire col db
-		function sendTimes($form){
+		function sendTimes($el){
+			$form = $el.find(".newTimes");
 			var type = $form.parent().attr("id").slice(5);
 			var flag = null;
 			if (type=="food") flag = 0;
@@ -57,6 +63,7 @@
 
 				request.done(function(data) {
 					console.log("DONE");
+					handleInsert($(this), $el.find('ul.times'));
 					//TODO handleInsert(data, $this) per scrivere gli orari dal popup all'elenco sulla pagina
 				});
 				request.fail(function(){
@@ -64,6 +71,46 @@
 				});
 
 			});
+		}
+
+		function handleInsert($el, $position){
+			//$position = $el.find('ul.times');
+			var times = $el.val();
+
+			$position.append("<li>"+times+"</li>");
+		
+		}
+
+		function loadTimes($el){
+			var request = $.ajax({
+				url : options.serverURL,
+				type: "POST",
+				data:{
+					"action" : "load"
+				},
+				dataType: "json"
+			});
+
+			request.done(function(data) {
+				handleLoad(data, $el);
+			});
+	 
+			request.fail(function(jqXHR, textStatus) {
+					alert( "Request failed: " + textStatus );
+			});		
+		}
+
+		function handleLoad(data, $el){
+			$position = $el.find('ul.times');
+			var times = data['times'];
+			html = "";
+
+			if(times.length>0){
+				$(times).each(function(index, object){
+					html += "<li>"+object['time']+"</li>";
+				});
+				$position.append(html);
+			}
 		}
 
 		function load_pop_up($el) {
@@ -95,8 +142,7 @@
 			let html = '';
 
 			//invio del contenuto del popup al db
-			sendTimes($form);
-
+			sendTimes($el);
 			for (var i = 0; i < input.length; i++) {
 				html += '<li>'+$form.find(input[i]).val()+'</li>';
 			}
@@ -104,8 +150,6 @@
 			let $times = $el.find('ul.times');
 			$times.append(html);
 		}
-
-
 	}
 })(jQuery);
 
@@ -114,3 +158,4 @@ function closeField(button){
 	let field = button.closest('.time')
 	field.remove()
 }
+
