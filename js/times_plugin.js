@@ -33,8 +33,8 @@
 				close_pop_up($this);
 			});
 
-			//TODO loadTime() per caricare i dati sul sito dal db
-			//TODO ControlFlag per dividere gli orari in pasti e uscite
+			loadTimes($this);
+
 		});
 
 		//inizio funzioni per interagire col db
@@ -65,6 +65,38 @@
 				});
 
 			});
+		}
+
+		function loadTimes($el){
+			var request = $.ajax({
+				url : options.serverURL,
+				type: "POST",
+				data:{
+					"action" : "load"
+				},
+				dataType: "json"
+			});
+
+			request.done(function(data) {
+				handleLoad(data, $el);
+			});
+	 
+			request.fail(function(jqXHR, textStatus) {
+					alert( "Request failed: " + textStatus );
+			});		
+		}
+
+		function handleLoad(data, $el){
+			$position = $el.find('ul.times');
+			var times = data['times'];
+			html = "";
+
+			if(times.length>0){
+				$(times).each(function(index, object){
+					html += "<li>"+object['time']+"</li>";
+				});
+				$position.append(html);
+			}
 		}
 
 		function load_pop_up($el) {
@@ -105,8 +137,6 @@
 			let $times = $el.find('ul.times');
 			$times.append(html);
 		}
-
-
 	}
 })(jQuery);
 

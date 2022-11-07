@@ -25,6 +25,29 @@
 		break;
 	}
 
+	function loadData(){
+		$query_string ="SELECT * FROM orari ORDER BY time ASC";
+		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
+
+		$result = $mysqli->query($query_string); 
+	
+    	$times = array();	
+
+    	while($row = $result->fetch_array(MYSQLI_ASSOC)){
+    		$row_id = $row['id'];
+    		$row_flag = $row['controlFlag'];
+    		$row_time = $row['time'];
+    	
+			$time = array('id' => $row_id,'controlFlag' =>$row_flag, 'time' => $row_time);
+			array_push($times, $time);    	
+		}
+
+    	$response = array('times' => $times, 'type' => 'insert');
+
+		// encodo l'array in JSON
+		echo json_encode($response);
+	}
+
 	function insertData(){
 		if (isset($_POST['time'])) {
 			$time = $_POST['time'];
