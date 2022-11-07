@@ -134,12 +134,6 @@
 
 			//invio del contenuto del popup al db
 			sendTimes($el);
-			for (var i = 0; i < input.length; i++) {
-				html += '<li>'+$form.find(input[i]).val()+'</li>';
-			}
-
-			let $times = $el.find('ul.times');
-			$times.append(html);
 		}
 	}
 })(jQuery);
