@@ -273,9 +273,10 @@ canvas#plotPeso {
 	background-color: white;
 	width: 400px;
 	max-width: 80%;
+	z-index: 25;
+
 }
 .modal.active{
-	z-index: 25;
 	transform: translate(-50%, -50%) scale(1);
 }
 .modal-header{
@@ -316,10 +317,11 @@ canvas#plotPeso {
 	bottom: 0;
 	background-color: rgba(0, 0, 0, .5);
 	pointer-events: none;
+	z-index: 15;
+
 }
 
 .overlay.active{
-	z-index: 15;
 	opacity: 1;
 	pointer-events: all;
 }
@@ -358,8 +360,7 @@ canvas#plotPeso {
 	}
 	
 	.info-active{
-		left: 50% !important;
-		transform: translateX(-50%);
+		left: 10% !important;
 		width: 90%;
 	}
 	.menu-container{

@@ -11,11 +11,12 @@
 			let $openButton = $('.open', $this);//$this = .selezioneOrari
 			let $addButton = $('.add', $this);
 			let $closeButton = $('.close-button', $this);
-			let $overlay = $('.overlay', $this);
+			let overlay = document.getElementsByClassName("overlay");
+			let $overlay = $(overlay);
 
 			$openButton.on('click', function(){
 				$this.find('.modal').addClass('active');
-				$this.find('.overlay').addClass('active');
+				$overlay.addClass('active');
 			});
 
 			$addButton.on('click', function(){
@@ -26,10 +27,14 @@
 			});
 
 			$closeButton.on('click', function(){
+				$this.find('.modal').removeClass('active');
+				$overlay.removeClass('active');
 				close_pop_up($this);
 			});
 
 			$overlay.on('click', function(){
+				$this.find('.modal').removeClass('active');
+				$overlay.removeClass('active');
 				close_pop_up($this);
 			});
 			loadTimes($this);
@@ -109,25 +114,24 @@
 			var classArr = classList.split(" ");
 			console.log(classArr[0]);
 			let html = '<button data-modal-target="#modalFood" class="edit open"><i class="fa-solid fa-pencil"></i></button>';
-			html += '<div class="modal">'+
-						'<div class="modal-header">'+
-							'<div class="title">Modifica gli orari</div>'+
-							'<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>'+
-						'</div>'+
-						'<div class="modal-body" id="modal'+classArr[0]+'">'+
-		 					'<form class="newTimes">'+
+			html +='<div class="modal">'+
+							'<div class="modal-header">'+
+								'<div class="title">Modifica gli orari</div>'+
+								'<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>'+
+							'</div>'+
+							'<div class="modal-body" id="modal'+classArr[0]+'">'+
+		 						'<form class="newTimes">'+
 
-							'</form>'+
-							'<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>'+		
-						'</div>'+	
-					'</div>'+ 
-					'<div class="overlay"></div>';
+								'</form>'+
+								'<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>'+	
+						'</div>'+
+					'</div>';
 			$el.append(html);
 		}	
 
 		function close_pop_up($el){
-			$el.find('.modal').removeClass('active');
-			$el.find('.overlay').removeClass('active');
+			//$el.find('.modal').removeClass('active');
+			//$el.find('.overlay').removeClass('active');
 			let $form = $el.find('.newTimes');
 			var input = $('input.time-field', $form);
 			let html = '';
