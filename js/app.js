@@ -1,8 +1,9 @@
 //START NAVBAR SCRIP
+	const sos_btn = document.getElementById("sos-btn");
 	const food_btn = document.getElementById("food-btn");
 	const health_btn = document.getElementById("health-btn");
 	const health_info = document.querySelector("#health-info");
-	const food_info = document.querySelector("#food-info")
+	const food_info = document.querySelector("#food-info");
 
 	health_btn.addEventListener('click', ()=>{
 		health_info.classList.add("info-active");
@@ -18,6 +19,7 @@
 		health_info.classList.remove("info-active");
 		health_info.classList.add("avoid-clicks");
 	});
+
 
 //END NAVBAR SCRIPT
 
@@ -58,3 +60,11 @@ function pickAndPlotValues(idValue, idLabel) {
 	else return;
 }
 //END PLOT SCRIPT
+
+//START MAP SCRIPT
+
+function sos_open(){
+
+}
+
+//END MAP SCRIPT

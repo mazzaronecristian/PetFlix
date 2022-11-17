@@ -13,7 +13,10 @@
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/times_plugin_init.js"></script>
 	<script type="text/javascript" src="js/times_plugin.js"></script>
+	<script type="text/javascript" src="js/sos_plugin_init.js"></script>
+	<script type="text/javascript" src="js/sos_plugin.js"></script>
 	<script defer type="text/javascript" src="js/app.js"></script>
+
 	<title>food</title>
 </head>
 
@@ -89,9 +92,16 @@
 
 	</div>
 	
-	<div class="overlay">
-		
-		
+	<div class="popup_sos">
+		<div class="sos_header">
+			<h2 class="title">Veterinari aperti vicino a te</h2>
+			<button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>
+		</div>
+		<div id="googleMap" style="width:100px;height:400px;"></div>
 	</div>
+
+	<div class="overlay"></div>
+				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkaYPTyt7MbCh5tO_15L1WtizzxveAFeE&libraries=places&callback=myMap"></script>
+
 </body>
 </html>

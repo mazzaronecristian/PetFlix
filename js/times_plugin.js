@@ -130,8 +130,6 @@
 		}	
 
 		function close_pop_up($el){
-			//$el.find('.modal').removeClass('active');
-			//$el.find('.overlay').removeClass('active');
 			let $form = $el.find('.newTimes');
 			var input = $('input.time-field', $form);
 			let html = '';
