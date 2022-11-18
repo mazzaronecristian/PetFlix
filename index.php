@@ -28,7 +28,7 @@
 			<div class="menu">
 				<button id="food-btn" class="btn transparent">Cibo</button>
 				<button id="health-btn" class="btn transparent">Salute</button>
-				<button id="sos-btn" class="btn">SOS</button>
+				<button id="sos-btn" class="btn" onclick="location.href='https://www.google.com/maps/search/veterinario+vicino+a+me'">SOS</button>
 			</div>
 
 			<img src="images/register.svg">
@@ -101,7 +101,5 @@
 	</div>
 
 	<div class="overlay"></div>
-				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkaYPTyt7MbCh5tO_15L1WtizzxveAFeE&libraries=places&callback=myMap"></script>
-
 </body>
 </html>
