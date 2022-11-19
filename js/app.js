@@ -60,10 +60,3 @@ function pickAndPlotValues(idValue, idLabel) {
 	else return;
 }
 //END PLOT SCRIPT
-//START MAP SCRIPT
-
-function sos_open(){
-
-}
-
-//END MAP SCRIPT

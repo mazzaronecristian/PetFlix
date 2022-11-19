@@ -262,12 +262,6 @@ canvas#plotPeso {
 *, *::after, *::before{
 	box-sizing: border-box;
 }
-#googleMap{
-	width: 90% !important;
-	height: 300px !important;
-	align-self: center;
-	border-radius: 10px;
-}
 
 .modal{
 	position: fixed;
