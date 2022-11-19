@@ -13,8 +13,6 @@
 		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="js/times_plugin_init.js"></script>
 		<script type="text/javascript" src="js/times_plugin.js"></script>
-		<script type="text/javascript" src="js/sos_plugin_init.js"></script>
-		<script type="text/javascript" src="js/sos_plugin.js"></script>
 		<script defer type="text/javascript" src="js/app.js"></script>
 
 		<title>food</title>
