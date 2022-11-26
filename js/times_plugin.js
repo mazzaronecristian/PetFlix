@@ -21,8 +21,7 @@
 
 			$addButton.on('click', function(){
 				let $field = $this.find('.newTimes');
-				let html = 	"<div class=\"time\"><input class=\"time-field\" type=\"time\" value=\"00:00\"><button onclick=\"closeField(this)\" class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
-
+				let html = 	"<div class=\"time\"><input class=\"time-field\" type=\"time\" value=\"00:00\"><button type='button' class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
 				$field.append(html);
 			});
 
@@ -37,16 +36,50 @@
 				$overlay.removeClass('active');
 				close_pop_up($this);
 			});
+
+			$("body").on("click", ".remove", function() {
+				let field = $(this).parent();
+				removeTimes($(field), $this);
+			});
+
 			loadTimes($this);
 		});
 
+		function removeTimes($field, $el){
+			let id = $field.attr("id");
+			var request = $.ajax({
+				url: options.serverURL,
+				type: "POST",
+				data:{
+					"id": id,
+					"action": "remove"
+				},
+				dataType: "json"
+			});
+
+			request.done(function(data) {
+				console.log("DONE");
+				$field.remove();
+				handleRemove($el.find("ul.times"), id);
+			});
+			request.fail(function(){
+				console.log("fail");
+			});
+
+		}
+
+		function handleRemove($position, id){
+			let field = $("#"+id+"", $position);
+			field.remove();
+		}
 		//inizio funzioni per interagire col db
 		function sendTimes($el){
-			$form = $el.find(".newTimes");
-			var type = $form.parent().attr("id").slice(5);
+			var type = $el.attr("id");
+			let $form = $el.find(".newTimes");
+			//var type = $form.parent().attr("id").slice(5);
 			var flag = null;
-			if (type=="food") flag = 0;
-			if (type=="walk") flag = 1
+			if (type=="cibo") flag = 0;
+			if (type=="uscite") flag = 1;
 			$form.find(".time-field").each(function(){
 				var time = $(this).val();
 				var request = $.ajax({
@@ -62,8 +95,8 @@
 
 				request.done(function(data) {
 					console.log("DONE");
-					handleInsert(time, $el.find('ul.times'));
-					//TODO handleInsert(data, $this) per scrivere gli orari dal popup all'elenco sulla pagina
+					handleInsert(data, $el.find('ul.times'));
+					handleInsertInPopUp(data, $el.find('form.newTimes'));
 				});
 				request.fail(function(){
 					console.log("fail");
@@ -72,38 +105,73 @@
 			});
 		}
 
-		function handleInsert(time, $position){
-			//$position = $el.find('ul.times');
-			$position.append("<li>"+time+"</li>");
-		}
-
 		function loadTimes($el){
+			var type = $el.attr("id");
+			var flag = null;
+			if (type=="cibo") flag = 0;
+			if (type=="uscite") flag = 1;
 			var request = $.ajax({
 				url : options.serverURL,
 				type: "POST",
 				data:{
+					"flag": flag,
 					"action" : "load"
 				},
 				dataType: "json"
 			});
 
 			request.done(function(data) {
-				handleLoad(data, $el);
+				handleLoad(data, $el.find('ul.times'));
+				handleLoadInPopUp(data, $el.find('form.newTimes'));
 			});
 	 
 			request.fail(function(jqXHR, textStatus) {
-					alert( "Request failed: " + textStatus );
+				alert( "Request failed: " + textStatus );
 			});		
 		}
 
-		function handleLoad(data, $el){
-			$position = $el.find('ul.times');
+		function handleInsert(data, $position){
 			var times = data['times'];
-			html = "";
+			let html = "";
+			if(times.length>0){
+				$(times).each(function(index, object){
+					html += "<li id="+object['id']+">"+object['time']+"</li>";
+				});
+				$position.append(html);
+			}
+		}
+
+		function handleInsertInPopUp(data, $position) {
+			var times = data['times'];
+			if(times.length>0){
+				$(times).each(function(index, object){
+					$("div.time", $position).last().attr("id", object['id']);
+				});
+			}	
+		}
+
+		function handleLoad(data, $position){
+			var times = data['times'];
+			let html = "";
 
 			if(times.length>0){
 				$(times).each(function(index, object){
-					html += "<li>"+object['time']+"</li>";
+					html += "<li id="+object['id']+">"+object['time']+"</li>";
+				});
+				$position.append(html);
+			}
+		}
+
+		function handleLoadInPopUp(data, $position) {
+			var times = data['times'];
+			let html = "";
+
+			if(times.length>0){
+				$(times).each(function(index, object){
+				 	html += "<div id="+object['id']+
+				 		" class='time'><input class='time-field' type='time' value="+object['time']+
+		 				"><button type='button'"+
+		 				"class='edit remove'><i class='fa-solid fa-minus'></i></button></div>";
 				});
 				$position.append(html);
 			}
@@ -137,12 +205,7 @@
 			//invio del contenuto del popup al db
 			sendTimes($el);
 		}
+
 	}
+
 })(jQuery);
-
-//TODO modificare funzione closeField() e scriverla con jQuery
-function closeField(button){
-	let field = button.closest('.time')
-	field.remove()
-}
-

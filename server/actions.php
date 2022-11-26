@@ -20,13 +20,19 @@
 		case "update" :
 	   		updateData();
 		break;
-		case "delete" :
-			deleteData();
+		case "remove" :
+			removeData();
 		break;
 	}
 
 	function loadData(){
-		$query_string ="SELECT * FROM orari ORDER BY time ASC";
+		if (isset($_POST['flag'])) {
+			$flag = $_POST['flag'];
+		} else {
+			echo "you didn't specify a type";
+			return;
+		}
+		$query_string ="SELECT * FROM orari WHERE controlFlag=$flag ORDER BY time ASC";
 		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
 
 		$result = $mysqli->query($query_string); 
@@ -63,12 +69,16 @@
 		$result = $mysqli->query($query_string);
 		$row = $result->fetch_array(MYSQLI_ASSOC);
 		
-		if($row == null){
-			$query_string = "INSERT INTO orari (controlFlag, time) values ($flag, '". htmlspecialchars($time) ."')";
-			$result = $mysqli->query($query_string);
+		if($row != null){
+			echo "orario già inserito";
+			return;
 		}
 
-		$query_string = 'SELECT * FROM orari ORDER BY time ASC';
+		$query_string = "INSERT INTO orari (controlFlag, time) values ($flag, '". htmlspecialchars($time) ."')";
+		$result = $mysqli->query($query_string);
+
+		//ritorno il dato appena inserito per poterlo aggiungere alla schermata del sito e al popup
+		$query_string = "SELECT * FROM orari WHERE controlFlag=$flag AND time= '".htmlspecialchars($time)."'";
 		$result = $mysqli->query($query_string);  
 		
     	$times = array();	
@@ -86,5 +96,21 @@
 
 		// encodo l'array in JSON
 		echo json_encode($response);
+	}
+
+	function removeData(){
+		if(isset($_POST["id"]))
+			$id = $_POST["id"];
+		else{
+			echo "errore, id non specificato";
+			return;
+		}
+
+		$query_string = "DELETE FROM orari WHERE id=$id";
+		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
+		$result = $mysqli->query($query_string);  
+
+		echo json_encode($response);
+
 	}
 ?>
