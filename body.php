@@ -6,7 +6,8 @@
 			<div class="menu">
 				<button id="food-btn" class="btn transparent">Cibo</button>
 				<button id="health-btn" class="btn transparent">Salute</button>
-				<button id="sos-btn" class="btn" onclick="location.href='https://www.google.com/maps/search/veterinario+vicino+a+me'">SOS</button>
+				<button id="sos-btn" class="btn" 
+				onclick="location.href='https://www.google.com/maps/search/veterinario+vicino+a+me'">SOS</button>
 			</div>
 
 			<img src="images/register.svg">
