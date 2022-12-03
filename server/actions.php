@@ -19,7 +19,7 @@
 		break; 
 		case "update" :
 	   		updateData();
-		break;
+		break;	
 		case "remove" :
 			removeData();
 		break;
