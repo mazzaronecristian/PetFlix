@@ -21,8 +21,14 @@
 
 			$addButton.on('click', function(){
 				let $field = $this.find('.newTimes');
+				var count = $field.find("div.time").length;
+				if(count == 5){
+					alert("Non puoi programmare più di 5 pasti");
+					return;
+				}
 				let html = 	"<div class=\"time\"><input class=\"time-field\" type=\"time\" value=\"00:00\"><button type='button' class=\"edit remove\"><i class=\"fa-solid fa-minus\"></i></button></div>";
 				$field.append(html);
+
 			});
 
 			$closeButton.on('click', function(){
@@ -40,6 +46,8 @@
 			$("body").on("click", ".remove", function() {
 				let field = $(this).parent();
 				removeTimes($(field), $this);
+				$(field).remove();
+
 			});
 
 			loadTimes($this);
@@ -59,7 +67,6 @@
 
 			request.done(function(data) {
 				console.log("DONE");
-				$field.remove();
 				handleRemove($el.find("ul.times"), id);
 			});
 			request.fail(function(){
@@ -82,21 +89,26 @@
 			if (type=="uscite") flag = 1;
 			$form.find(".time-field").each(function(){
 				var time = $(this).val();
+				var action = "update";
+				var id = $(this).parent().attr("id");
+				if(id === undefined)
+					action = "insert";			
+				
 				var request = $.ajax({
 					url: options.serverURL,
 					type: "POST",
 					data: {
+						"id": id,
 						"time" : time, 
 						"flag" : flag,
-						"action" : "insert"
+						"action" : action
 					},
 					dataType: "json"
 				});
-
 				request.done(function(data) {
-					console.log("DONE");
 					handleInsert(data, $el.find('ul.times'));
-					handleInsertInPopUp(data, $el.find('form.newTimes'));
+					handleInsertInPopUp(data, $el.find('form.newTimes'), $el.find('ul.times'));
+					console.log("DONE");
 				});
 				request.fail(function(){
 					console.log("fail");
@@ -136,24 +148,35 @@
 			if(times.length>0){
 				$(times).each(function(index, object){
 					html += "<li id="+object['id']+">"+object['time']+"</li>";
+					$position.find("li").each(function(){
+						var currentId = $(this).attr("id");
+						if (currentId == object['id'])
+							$(this).remove();
+					});
 				});
 				$position.append(html);
 			}
 		}
 
-		function handleInsertInPopUp(data, $position) {
-			var times = data['times'];
-			if(times.length>0){
-				$(times).each(function(index, object){
-					$("div.time", $position).last().attr("id", object['id']);
-				});
-			}	
+		function handleInsertInPopUp(data, $position, $source) {
+			let html = "";
+			$position.empty();
+			$source.find("li").each(function(){
+				var id = $(this).attr("id");
+				var value = $(this).text();
+				console.log(value);
+				html += "<div id="+id+
+				 		" class='time'><input class='time-field' type='time' value="+value+
+		 				"><button type='button'"+
+		 				"class='edit remove'><i class='fa-solid fa-minus'></i></button></div>";
+			});
+			$position.append(html);
+
 		}
 
 		function handleLoad(data, $position){
 			var times = data['times'];
 			let html = "";
-
 			if(times.length>0){
 				$(times).each(function(index, object){
 					html += "<li id="+object['id']+">"+object['time']+"</li>";

@@ -18,8 +18,18 @@
 			<div class="info-container">
 
 				<!-- cibo-->
+				<div class="taglia">
+					<h2>Taglia del tuo animale</h2>
+					<form>
+						<select name="taglia" class="">
+							<option value="1" selected="selected">Da borsetta</option>
+							<option value="2">Taglia media</option>
+							<option value="3">Dinosauro</option>
+						</select>
+					</form>
+				</div>
 				<div id="cibo" class="food sezioneOrari">
-					<h2>Orari Cibo</h2>
+					<h2>Pianifica orari</h2>
 					<ul class="times">
 						
 					</ul>
@@ -27,7 +37,7 @@
 
 				<!--acqua-->
 
-				<div class="acqua">
+				<!--<div class="acqua">
 					<h2>Erogazione Acqua</h2>
 					<div class="erogazioneAcqua">
 						<span>Eroga l'acqua se il cane è vicino</span>
@@ -36,7 +46,7 @@
 						 	<span class="slider"></span>
 						</label>
 					</div>
-				</div>
+				</div>-->
 
 			</div>
 			
