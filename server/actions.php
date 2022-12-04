@@ -156,7 +156,7 @@
 		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
 		$result = $mysqli->query($query_string);  
 
-		echo json_encode($response);
+		echo "removed";
 
 	}
 
