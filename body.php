@@ -24,7 +24,7 @@
           <form>
             <select name="taglia" class="">
               <option value="1" selected="selected">Da borsetta</option>
-              <option value="2">Taglia media</option>
+              <option value="2">Una via di mezzo</option>
               <option value="3">Dinosauro</option>
             </select>
           </form>
