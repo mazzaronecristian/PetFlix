@@ -46,7 +46,13 @@
 						</label>
 					</div>
 				</div>-->
+
+        <form>
+          <button id="instant-food-btn" class="btn">Cibo!!</button>
+        </form>
       </div>
+
+
     </section>
 
     <section id="health-info" class="info-right">
