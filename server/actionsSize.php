@@ -24,5 +24,4 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
 $response = array("value" => $row);
 
 echo json_encode($response);
-
 ?>

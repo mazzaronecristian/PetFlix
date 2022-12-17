@@ -161,4 +161,3 @@ function removeData()
 
 	echo json_encode("removed");
 }
-?>

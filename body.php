@@ -47,12 +47,10 @@
 					</div>
 				</div>-->
 
-        <form>
+        <div style="width: 100%; position: unset; text-align: center">
           <button id="instant-food-btn" class="btn">Cibo!!</button>
-        </form>
+        </div>
       </div>
-
-
     </section>
 
     <section id="health-info" class="info-right">

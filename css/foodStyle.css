@@ -65,7 +65,7 @@ form {
   transition: 0.5s;
   font-weight: 400;
 }
-#instant-food-btn.btn{
+#instant-food-btn.btn {
   background-color: var(--jungleGreen);
 }
 .btn:hover {
@@ -385,10 +385,11 @@ canvas#plotPeso {
     flex-direction: row;
   }
 
-  #instant-food-btn.btn{
+  #instant-food-btn.btn {
     text-align: center;
+    width: 60%;
   }
-  
+
   .btn {
     width: 110px;
     height: 35px;
