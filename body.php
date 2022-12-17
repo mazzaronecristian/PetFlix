@@ -21,8 +21,8 @@
         <!-- cibo-->
         <div class="taglia">
           <h2>Taglia del tuo animale</h2>
-          <form>
-            <select name="taglia" class="">
+          <form action="server/actionsSize.php" method="post">
+            <select name="taglia" class="" onchange="selectChange(this.value)">
               <option value="1" selected="selected">Da borsetta</option>
               <option value="2">Una via di mezzo</option>
               <option value="3">Dinosauro</option>

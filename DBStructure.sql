@@ -7,11 +7,11 @@
 --
 
 CREATE TABLE `impostazioni` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` text NOT NULL,
-  `state` bit NOT NULL,
+  `id` int(11) NOT NULL,
+  `description` VARCHAR(11) NOT NULL,
+  `state` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `pesi` (
