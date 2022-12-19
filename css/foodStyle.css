@@ -1,5 +1,6 @@
 :root {
   --jungleGreen: #43aa8b;
+  --forestGreen: #3A9278;
   --queenBlue: #577590;
   --mangoTango: #f9844a;
   --kingBlue: #455d73;
@@ -65,12 +66,17 @@ form {
   transition: 0.5s;
   font-weight: 400;
 }
-#instant-food-btn.btn {
-  background-color: var(--jungleGreen);
-}
 .btn:hover {
   background-color: var(--kingBlue);
 }
+
+.instant-food-btn{
+  background-color: var(--jungleGreen);
+}
+.instant-food-btn:hover{
+  background-color: var(--forestGreen);
+}
+
 
 /* END GENERAL RULES*/
 

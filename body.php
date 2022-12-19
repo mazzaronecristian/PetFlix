@@ -20,12 +20,12 @@
       <div class="info-container">
         <!-- cibo-->
         <div class="taglia">
-          <h2>Taglia del tuo animale</h2>
+          <h2>Seleziona la taglia del tuo animale</h2>
           <form action="server/actionsSize.php" method="post">
-            <select name="taglia" class="" onchange="selectChange(this.value)">
-              <option value="1" selected="selected">Da borsetta</option>
-              <option value="2">Una via di mezzo</option>
-              <option value="3">Dinosauro</option>
+            <select id="101" class="" onchange="sendOptionConfiguration(this.id, this.value)">
+              <option value="1" selected="selected">Piccola</option>
+              <option value="2">Media</option>
+              <option value="3">Grande</option>
             </select>
           </form>
         </div>
@@ -48,7 +48,7 @@
 				</div>-->
 
         <div style="width: 100%; position: unset; text-align: center">
-          <button id="instant-food-btn" class="btn" onclick="sendFoodCommand(1)">Cibo!!</button>
+          <button id="103" class="btn instant-food-btn" onclick="sendOptionConfiguration(this.id,1)">CIBO!</button>
         </div>
       </div>
     </section>
