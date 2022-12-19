@@ -1,5 +1,8 @@
 <?php
-
+header("Access-Controll-Allow-Origin: null");
+header("Access-Controll-Allow-Methods: POST");
+header('Content-Type: text/json');
+include("config.php");
 $id = $_POST['id'];
 $state = $_POST['state'];
 
@@ -10,8 +13,14 @@ $result = $mysqli->query($query_string);
 $row = $result->fetch_array(MYSQLI_ASSOC);
 
 
-if ($row != null) $query_string = "UPDATE impostazioni SET state = $state WHERE id = $id";
-else $query_string = "INSERT INTO impostazioni values ($id, $state)";
+if ($row != null) {
+    $query_string = "UPDATE impostazioni SET state = $state WHERE id = $id";
+    $result = $mysqli->query($query_string);
+}
+else{
+    $query_string = "INSERT INTO impostazioni values ($id, $state)";
+    $result = $mysqli->query($query_string);
+} 
 
 $query_string = "SELECT * FROM impostazioni WHERE id = $id";
 $result = $mysqli->query($query_string);

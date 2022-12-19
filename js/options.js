@@ -1,12 +1,11 @@
-function selectChange(value){
-    console.log("🚀 ~ file: size.js:16 ~ selectChange ~ funziona!!", value);
+function sendOptionConfiguration(id, state){
+    console.log("🚀 ~ file: size.js:16 ~ selectChange ~ impostazione", state);
     var request = $.ajax({
-        url: "server/actionsSize.php",
+        url: "server/actionsOptions.php",
         type: "POST",
         data: {
-          id: 1234,
-          description: "taglia",
-          state: value,  
+          id: id,
+          state: state,  
         },
         dataType: "json",
       });

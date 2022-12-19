@@ -48,7 +48,7 @@
 				</div>-->
 
         <div style="width: 100%; position: unset; text-align: center">
-          <button id="instant-food-btn" class="btn">Cibo!!</button>
+          <button id="instant-food-btn" class="btn" onclick="sendFoodCommand(1)">Cibo!!</button>
         </div>
       </div>
     </section>
