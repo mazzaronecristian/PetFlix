@@ -23,6 +23,7 @@
           <h2>Seleziona la taglia del tuo animale</h2>
           <form action="server/actionsSize.php" method="post">
             <select id="101" class="" onchange="sendOptionConfiguration(this.id, this.value)">
+              <!--TODO aggiungere un campo vuoto di default-->
               <option value="1" selected="selected">Piccola</option>
               <option value="2">Media</option>
               <option value="3">Grande</option>
