@@ -1,9 +1,9 @@
 (function ($) {
-  $.fn.times = function (options) {
+  $.fn.times = function (server) {
     var defaults = {
       serverURL: "example.com/server_page_url",
     };
-    options = $.extend(defaults, options);
+    server = $.extend(defaults, server);
 
     return this.each(function (i, obj) {
       let $this = $(this);
@@ -55,7 +55,7 @@
     function removeTimes($field, $el) {
       let id = $field.attr("id");
       var request = $.ajax({
-        url: options.serverURL,
+        url: server.serverURL,
         type: "POST",
         data: {
           id: id,
@@ -92,7 +92,7 @@
         if (id === undefined) action = "insert";
 
         var request = $.ajax({
-          url: options.serverURL,
+          url: server.serverURL,
           type: "POST",
           data: {
             id: id,
@@ -123,7 +123,7 @@
       if (type == "cibo") flag = 0;
       if (type == "uscite") flag = 1;
       var request = $.ajax({
-        url: options.serverURL,
+        url: server.serverURL,
         type: "POST",
         data: {
           flag: flag,

@@ -1,4 +1,4 @@
 jQuery(document).ready(function () {
-    console.log("TIMES PLUGIN IS READY");
-    jQuery(".option").options({ serverURL: "server/actions.php" });
+    console.log("OPTIONS PLUGIN IS READY");
+    jQuery(".option").options({ serverURL: "server/actionsOptions.php" });
   });

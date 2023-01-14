@@ -191,20 +191,16 @@ form {
   padding: 5px 0;
 }
 
-.erogazioneAcqua {
+.serviceAbilitator {
   display: flex;
   flex-direction: row;
-  align-content: center;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-.erogazioneAcqua span {
-  flex-shrink: 10;
-}
 .switch {
   margin-top: 3px;
-  margin-left: 10px;
+  margin-left: 15px;
   position: relative;
   display: inline-block;
   width: 30px;

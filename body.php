@@ -31,7 +31,14 @@
           </form>
         </div>
         <div id="cibo" class="food sezioneOrari">
-          <h2>Pianifica orari</h2>
+          <div class="serviceAbilitator">
+            <h2>Pianifica orari</h2>
+            <label class="switch">
+                  <input class="option" id="102" type="checkbox">
+                <span class="slider"></span>
+            </label>
+          </div>
+
           <ul class="times"></ul>
         </div>
 
@@ -73,7 +80,13 @@
         </div>
 
         <div id="uscite" class="walk sezioneOrari">
-          <h2>Programma uscite</h2>
+          <div class="serviceAbilitator">
+            <h2>Programma uscite</h2>
+            <label class="switch">
+              <input class="option" id="202" type="checkbox">                
+              <span class="slider"></span>
+            </label>
+          </div>
           <ul class="times"></ul>
         </div>
       </div>
