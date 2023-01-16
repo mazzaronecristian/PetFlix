@@ -21,7 +21,8 @@
     <script defer type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/options_init.js"></script>
     <script type="text/javascript" src="js/options.js"></script>
-
+    <script type="text/javascript" src="js/plot_init.js"></script>
+    <script type="text/javascript" src="js/plot.js"></script>
     <title>food</title>
   </head>
 

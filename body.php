@@ -50,18 +50,16 @@
 
     <section id="health-info" class="info-right">
       <div class="info-container">
-        <div class="peso">
+        <div class="peso plot-peso">
           <h2>Controllo peso</h2>
           <form>
             <label>inserisci peso: </label>
-            <input id="peso" type="text" name="peso" placeholder="kg" />
-            <input id="data" type="date" name="data" />
+            <input class="nuovoPeso" type="text" name="peso" placeholder="kg" />
+            <input class="nuovaData" type="date" name="data" />
           </form>
-          <button onclick='pickAndPlotValues("peso", "data")' class="edit">
+          <button class="invio-peso edit">
             <i class="fa-solid fa-file-import"></i>
           </button>
-        </div>
-        <div class="plot-peso">
           <h2>Grafico</h2>
           <canvas id="plotPeso" style="width: 100%; max-width: 700px"></canvas>
         </div>
