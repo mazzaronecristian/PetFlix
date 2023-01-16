@@ -19,7 +19,7 @@ function sendOptionConfiguration(id, state){
 }
 
 (function($){
-  $.fn.options = function(server){
+  $.fn.switches = function(server){
     var defaults = {
       serverURL: "example.com/server_page_url",
     };
@@ -34,7 +34,7 @@ function sendOptionConfiguration(id, state){
     });
 
     function loadOptions(item){
-      id = $(item).attr("id");
+      var id = $(item).attr("id");
       var request = $.ajax({
         url: server.serverURL,
         type: "POST",
@@ -54,34 +54,59 @@ function sendOptionConfiguration(id, state){
     }
 
     function sendOption(id, state){
-      console.log("🚀 ~ file: size.js:16 ~ selectChange ~ impostazione", state);
       state = state ? 1 : 0;
-      var request = $.ajax({
-          url: server.serverURL,
-          type: "POST",
-          data: {
-            id: id,
-            state: state,  
-            action: "insert"
-
-          },
-          dataType: "json",
-        });
-        request.done(function (data) {
-          console.log("DONE");
-        });
-        request.fail(function () {
-          console.log("fail");
-        });
+      sendOptionConfiguration(id, state);
     }
 
     function handleLoad(data, item) {
       var state = data['state'];
       item.checked = state==1 ? true : false;
-      /*if(state == 1)
-        item.checked = true;
-      else if(state == 0 )
-        item.checked = false;*/
+      /**
+        if(state == 1)
+          item.checked = true;
+        else if(state == 0 )
+          item.checked = false;
+      */
+    }
+  }
+
+  $.fn.selectors = function(server){
+    var defaults = {
+      serverURL: "example.com/server_page_url",
+    };
+    server = $.extend(defaults, server);
+  
+    return this.each(function(i, obj){
+      this.addEventListener("change",() =>{
+        sendOptionConfiguration($(this).attr("id"),this.value);
+      });
+      
+      loadOptions(this);
+    });
+
+    function loadOptions(item){
+      var id = $(item).attr("id");
+      var request = $.ajax({
+        url: server.serverURL,
+        type: "POST",
+        data:{
+          id: id,
+          action: "load"
+        },
+        dataType: "json"
+      });
+      request.done(function (data) {
+        console.log("🚀 ~ file: options.js:46 ~ data", data);
+        handleLoad(data, item);
+      });
+      request.fail(function () {
+        console.log("fail");
+      });
+    }
+
+    function handleLoad(data, item) {
+      var state = data["state"];
+      item.value = state;
     }
   }
 })(jQuery);

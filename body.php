@@ -22,9 +22,9 @@
         <div class="taglia">
           <h2>Seleziona la taglia del tuo animale</h2>
           <form action="server/actionsSize.php" method="post">
-            <select id="101" class="" onchange="sendOptionConfiguration(this.id, this.value)">
-              <!--TODO aggiungere un campo vuoto di default-->
-              <option value="1" selected="selected">Piccola</option>
+            <select id="101" class="selector">
+            <option value="0">seleziona taglia</option>
+              <option value="1">Piccola</option>
               <option value="2">Media</option>
               <option value="3">Grande</option>
             </select>
@@ -34,26 +34,13 @@
           <div class="serviceAbilitator">
             <h2>Pianifica orari</h2>
             <label class="switch">
-                  <input class="option" id="102" type="checkbox">
+                  <input class="switch" id="102" type="checkbox">
                 <span class="slider"></span>
             </label>
           </div>
 
           <ul class="times"></ul>
         </div>
-
-        <!--acqua-->
-
-        <!--<div class="acqua">
-					<h2>Erogazione Acqua</h2>
-					<div class="erogazioneAcqua">
-						<span>Eroga l'acqua se il cane è vicino</span>
-						<label class="switch">
-						  	<input type="checkbox">
-						 	<span class="slider"></span>
-						</label>
-					</div>
-				</div>-->
 
         <div style="width: 100%; position: unset; text-align: center">
           <button id="103" class="btn instant-food-btn" onclick="sendOptionConfiguration(this.id,1)">CIBO!</button>
@@ -83,7 +70,7 @@
           <div class="serviceAbilitator">
             <h2>Programma uscite</h2>
             <label class="switch">
-              <input class="option" id="202" type="checkbox">                
+              <input class="switch" id="202" type="checkbox">                
               <span class="slider"></span>
             </label>
           </div>
