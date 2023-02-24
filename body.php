@@ -60,7 +60,13 @@
             </button>
           </div>
 
-          <h2>Grafico</h2>
+          <div class="pesi">
+            <h2>Grafico</h2>
+            <button class="edit-peso edit">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+          </div>
+
           <canvas id="plotPeso" style="width: 100%; max-width: 700px"></canvas>
         </div>
 

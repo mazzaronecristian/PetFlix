@@ -1,6 +1,6 @@
 :root {
   --jungleGreen: #43aa8b;
-  --forestGreen: #3A9278;
+  --forestGreen: #3a9278;
   --queenBlue: #577590;
   --mangoTango: #f9844a;
   --kingBlue: #455d73;
@@ -70,13 +70,12 @@ form {
   background-color: var(--kingBlue);
 }
 
-.instant-food-btn{
+.instant-food-btn {
   background-color: var(--jungleGreen);
 }
-.instant-food-btn:hover{
+.instant-food-btn:hover {
   background-color: var(--forestGreen);
 }
-
 
 /* END GENERAL RULES*/
 
@@ -262,12 +261,18 @@ input:checked + .slider:before {
   width: 120px;
 }
 
-.nuovi-pesi{
+.nuovi-pesi,
+.pesi {
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
+  align-items: center;
 }
-.invio-peso{
+
+.pesi .edit-peso i {
+  margin-left: 10px;
+}
+.invio-peso {
   margin-left: 10px;
 }
 canvas#plotPeso {
@@ -355,7 +360,7 @@ canvas#plotPeso {
 }
 
 .edit i {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .add {
@@ -363,10 +368,31 @@ canvas#plotPeso {
 }
 
 /* END POP-UP RULES*/
+@media (max-width: 1000px) {
+  .nuovi-pesi {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  .nuovi-pesi .invio-peso {
+    margin: 0 0 0 0;
+  }
+}
 /* START MOBILE RULES*/
 
 @media (max-width: 870px) {
+  .edit i {
+    font-size: 25px;
+  }
+
+  .nuovi-pesi {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .nuovi-pesi .invio-peso {
+    margin-left: 10px;
+  }
   .container:before {
     width: 2600px;
     height: 1800px;
@@ -408,12 +434,26 @@ canvas#plotPeso {
 }
 
 @media (max-width: 570px) {
+  .edit i {
+    font-size: 25px;
+  }
   .menu {
     margin: 0;
   }
   .container:before {
     width: 2000px;
     height: 1300px;
+  }
+}
+
+@media (max-width: 400px) {
+  .nuovi-pesi {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nuovi-pesi .invio-peso {
+    margin: 0 0 0 0;
   }
 }
 
