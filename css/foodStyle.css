@@ -262,6 +262,14 @@ input:checked + .slider:before {
   width: 120px;
 }
 
+.nuovi-pesi{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+.invio-peso{
+  margin-left: 10px;
+}
 canvas#plotPeso {
   width: 100% !important;
   height: 300px !important;
