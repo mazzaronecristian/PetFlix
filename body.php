@@ -10,7 +10,7 @@
         </button>
       </div>
 
-      <img src="images/register.svg" />
+      <img src="images/navbar.svg" />
     </div>
 
     <section id="food-info" class="info-left info-active">

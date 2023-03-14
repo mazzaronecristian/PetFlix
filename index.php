@@ -5,8 +5,8 @@ require("server/session.php");
 <html>
 
 <head>
-  <?php include('commonHeader.php') ?>
-
+  <?php include('commonHeader.php'); ?>
+  
   <link rel="stylesheet" type="text/css" href="css/foodStyle.css" />
   <script type="text/javascript" src="js/times_plugin_init.js"></script>
   <script type="text/javascript" src="js/times_plugin.js"></script>
