@@ -1,3 +1,6 @@
+<?php
+  require("server/session.php");
+?>
 <!DOCTYPE html>
 <html>
   <head>
