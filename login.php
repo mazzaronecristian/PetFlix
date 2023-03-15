@@ -16,7 +16,7 @@ header("Location: index.php");
 <html lang="en">
 
 <head>
-<?php include("commonHeader.php");?>  
+<?php include("header.php");?>  
     <link rel="stylesheet" href="css/login.css">
     <script src="js/app_login.js"></script>
     <title>PetFlix</title>
