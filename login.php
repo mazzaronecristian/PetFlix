@@ -1,15 +1,11 @@
 <?php
-/*$cookie_name = "username";
-$cookie_value = "pippo";
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
-$cookie_name = "password";
-$cookie_value = "password";
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
-if(isset($_COOKIE["username"])&&isset($_COOKIE["password"])){
-session_start();
-$_SESSION['name'] = $_COOKIE["username"];
-header("Location: index.php");
-}*/
+if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
+  session_start();
+  $_SESSION['username'] = $username;
+  $_SESSION['password'] = $password;
+  header("Location: index.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -25,15 +21,15 @@ header("Location: index.php");
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="#" class="sign-in-form">
+          <form method="POST" action="server/authentication.php" class="sign-in-form">
             <h2 class="title">Sign in</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="text" name="username" placeholder="Username" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" name="password" placeholder="Password" />
             </div>
             <input type="submit" value="Login" class="btn solid" />
           </form>

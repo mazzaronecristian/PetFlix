@@ -11,7 +11,4 @@ document.addEventListener('DOMContentLoaded', () => {
     sign_up_btn.addEventListener("click", () => {
       container.classList.add("sign-up-mode");
     });
-    
-
-    
   });
