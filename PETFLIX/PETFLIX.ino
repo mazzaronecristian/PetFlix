@@ -1,4 +1,4 @@
-//VERSIONE con WATCHDOG per notifica
+//VERSIONE 1.6 con WATCHDOG per notifica
 
 #include <WiFi.h>
 #include <HTTPClient.h>
