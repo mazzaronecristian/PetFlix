@@ -12,3 +12,5 @@ document.addEventListener('DOMContentLoaded', () => {
       container.classList.add("sign-up-mode");
     });
   });
+
+//TODO: verifica della validità delle credenziali di registrazione: email valida e conferma password

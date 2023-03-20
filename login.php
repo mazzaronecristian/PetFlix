@@ -1,8 +1,9 @@
 <?php
+
 if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
   session_start();
-  $_SESSION['username'] = $username;
-  $_SESSION['password'] = $password;
+  $_SESSION['username'] = $_COOKIE['username'];
+  $_SESSION['password'] = $_COOKIE['password'];
   header("Location: index.php");
 }
 
@@ -31,22 +32,34 @@ if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
               <i class="fas fa-lock"></i>
               <input type="password" name="password" placeholder="Password" />
             </div>
+            <?php
+                session_start();
+                if($_SESSION['loginError']){
+                  $_SESSION['loginError'] = false;
+                  ?>
+                  <span style="color: red;">email o password errati</span>
+                  <?php
+                }
+            ?>
             <input type="submit" value="Login" class="btn solid" />
           </form>
-          <form action="#" class="sign-up-form">
+          <form method="POST" action="server/registration.php" class="sign-up-form">
             <h2 class="title">Sign up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="text" name="username" placeholder="Username" />
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" />
+              <input type="email" name="email" placeholder="Email" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" name="password" placeholder="Password" />
             </div>
+            <?php
+              //TODO: controllo errori di registrazione
+            ?>
             <input type="submit" class="btn" value="Sign up" />
           </form>
         </div>
