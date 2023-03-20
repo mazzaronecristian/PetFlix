@@ -199,6 +199,17 @@ form.sign-in-form {
   transform: translateX(800px);
 }
 
+#errorSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#errorSection span{
+  color: red;
+  text-align: center;
+}
+
 /* ANIMATION */
 
 .container.sign-up-mode:before {

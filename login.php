@@ -1,8 +1,8 @@
 <?php
 
-if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
+if(isset($_COOKIE['emal'])&&isset($_COOKIE['password'])){
   session_start();
-  $_SESSION['username'] = $_COOKIE['username'];
+  $_SESSION['email'] = $_COOKIE['email'];
   $_SESSION['password'] = $_COOKIE['password'];
   header("Location: index.php");
 }
@@ -25,8 +25,8 @@ if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
           <form method="POST" action="server/authentication.php" class="sign-in-form">
             <h2 class="title">Sign in</h2>
             <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" name="username" placeholder="Username" />
+              <i class="fas fa-envelope"></i>
+              <input type="email" name="email" placeholder="Email" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
@@ -46,10 +46,6 @@ if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
           <form id="sign-up-form" class="sign-up-form">
             <h2 class="title">Sign up</h2>
             <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" name="username" placeholder="Username" />
-            </div>
-            <div class="input-field">
               <i class="fas fa-envelope"></i>
               <input type="email" name="email" placeholder="Email" />
             </div>
@@ -57,16 +53,12 @@ if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
               <i class="fas fa-lock"></i>
               <input type="password" name="password" placeholder="Password" />
             </div>
-            <?php
-              session_start();
-              if(isset($_SESSION['regError'])){
-                $_SESSION['regError'] = NULL;
-                ?>
-                  <h3>email già in uso</h3>
-                <?php
-              }
-
-            ?>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="cpassword" placeholder="Conferma Password" />
+            </div>
+            <div id="errorSection">
+            </div>
             <input type="button" name="registrazione" onclick="signup('server/registration.php')" class="btn" value="Sign up"/>
           </form>
         </div>

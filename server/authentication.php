@@ -1,9 +1,9 @@
 <?php
     include('config.php');
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query_string = "SELECT nome, pwd from utenti WHERE email = '$username'";
+    $query_string = "SELECT email, pwd from utenti WHERE email = '$email'";
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
 	$result = $mysqli->query($query_string);
@@ -16,9 +16,9 @@
         exit();
     } 
     else {
-        setcookie('username', $username, time() +60*60*24, '/');
+        setcookie('email', $email, time() +60*60*24, '/');
         setcookie('password', $password, time() +60*60*24, '/');
-        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
         $_SESSION['password'] = $password;
         header('Location: ../index.php');
         exit();
