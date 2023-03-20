@@ -14,3 +14,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 //TODO: verifica della validità delle credenziali di registrazione: email valida e conferma password
+
+function signup(serverURL){
+  const signupForm = document.querySelector('#sign-up-form');
+  var elements = signupForm.elements;
+
+  var myCredentials = {};
+
+  var elementsArray = Array.from(elements);
+  $(elementsArray).each((i,input)=>
+    myCredentials[input.name] = input.value
+  );
+  var request = $.ajax({
+    url : serverURL,
+    type: "POST",
+    data: {
+      username : myCredentials['username'],
+      email : myCredentials['email'],
+      password : myCredentials['password'],
+    },
+    dataType: "json",
+  });
+
+  request.done(function (data) {  
+    alert(data);
+  });
+}

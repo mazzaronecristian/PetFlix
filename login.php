@@ -43,7 +43,7 @@ if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
             ?>
             <input type="submit" value="Login" class="btn solid" />
           </form>
-          <form method="POST" action="server/registration.php" class="sign-up-form">
+          <form id="sign-up-form" class="sign-up-form">
             <h2 class="title">Sign up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -58,9 +58,16 @@ if(isset($_COOKIE['username'])&&isset($_COOKIE['password'])){
               <input type="password" name="password" placeholder="Password" />
             </div>
             <?php
-              //TODO: controllo errori di registrazione
+              session_start();
+              if(isset($_SESSION['regError'])){
+                $_SESSION['regError'] = NULL;
+                ?>
+                  <h3>email già in uso</h3>
+                <?php
+              }
+
             ?>
-            <input type="submit" class="btn" value="Sign up" />
+            <input type="button" name="registrazione" onclick="signup('server/registration.php')" class="btn" value="Sign up"/>
           </form>
         </div>
       </div>
