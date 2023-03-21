@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_COOKIE['emal'])&&isset($_COOKIE['password'])){
+if(isset($_COOKIE['email'])&&isset($_COOKIE['password'])){
   session_start();
   $_SESSION['email'] = $_COOKIE['email'];
   $_SESSION['password'] = $_COOKIE['password'];

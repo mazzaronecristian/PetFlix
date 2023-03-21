@@ -1,6 +1,10 @@
 <body>
   <div class="container">
+
+  <button class="btn transparent">Logout</button>
+
     <div class="menu-container">
+
       <div class="menu">
         <button id="food-btn" class="btn transparent">Cibo</button>
         <button id="health-btn" class="btn transparent">Salute</button>
