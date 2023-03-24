@@ -17,6 +17,10 @@
 
 <body>
   <div class="container">
+    
+    <div class="logout-container">
+      <a href="server/closeSession.php">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+    </div>
     <div class="menu-container">
       <div class="menu">
         <button id="food-btn" class="btn transparent">Cibo</button>

@@ -102,7 +102,29 @@ form {
   border-radius: 50%;
   z-index: 10;
 }
+.logout-container {
+  position: absolute;
+  left: 93%;
+  z-index: 11;
+  font-weight: 300;
+}
 
+.logout-container a{
+  text-decoration: none;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.logout-container a i{
+  text-decoration: none;
+  color: #fff;
+  transition: 0.5s;
+}
+
+
+a:hover{
+  text-decoration: underline;
+}
 .menu-container {
   position: fixed;
   top: 20%;
