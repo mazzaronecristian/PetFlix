@@ -47,7 +47,10 @@ function signup(serverURL) {
 
     request.done(function (data) {
       if (!data) alert("email già in uso");
-      else alert("registrazione avvenuta con successo");
+      else{
+        alert("registrazione avvenuta con successo");
+        window.location.href = "index.php";
+      }
     });
   }
 }
