@@ -19,6 +19,11 @@
   font-family: "Poppins", Helvetica, sans-serif;
 }
 
+a{
+  text-decoration: none;
+  color: black;
+}
+
 input,
 select {
   margin-bottom: 5px;
@@ -84,7 +89,7 @@ form {
 .container {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
   background-color: #fff;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -176,6 +181,7 @@ a:hover{
   left: 120%;
   height: auto;
   transition: 0.4s;
+  margin-top: 50px;
 }
 
 .info-left {
@@ -183,6 +189,7 @@ a:hover{
   left: -120%;
   height: auto;
   transition: 0.4s;
+  margin-top: 50px;
 }
 
 .info-container {
@@ -390,6 +397,42 @@ canvas#plotPeso {
 }
 
 /* END POP-UP RULES*/
+/*START DEVICES RULES*/
+.device-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  width: auto;
+  min-width: 200px;
+  max-width: 400px;
+  left : 50%;
+  transform: translateX(-50%);
+  top :90%;
+}
+
+.device{
+  border-left: 2px grey solid;  
+  padding-left: 5px;
+}
+
+.device:nth-child(1){
+  border: none;
+  padding: 0;
+}
+
+.device:hover{
+  text-decoration: underline;
+}
+
+.device-container .add{
+  padding: 0 10px 0 10px;
+}
+
+/* START TABLET RULES*/
 @media (max-width: 1000px) {
   .nuovi-pesi {
     flex-direction: column;

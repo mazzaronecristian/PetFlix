@@ -64,7 +64,7 @@ function validateEmail(mail) {
 }
 
 function validatePwd(pwd, cPwd) {
-  var pwdFormat = /^(?=.*\d)(?=.*[!@#$%^&_-/|*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  var pwdFormat = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   if (!pwd.match(pwdFormat)) {
     writeErrorMessage(
       "La password deve contenere almeno 8 caratteri, tra cui almeno un numero, una maiuscola e un carattere speciale."

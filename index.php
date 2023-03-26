@@ -16,11 +16,12 @@
 </head>
 
 <body>
-  <div class="container">
-    
-    <div class="logout-container">
+<div class="logout-container">
       <a href="server/closeSession.php">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
+  <div class="container">
+    
+
     <div class="menu-container">
       <div class="menu">
         <button id="food-btn" class="btn transparent">Cibo</button>
@@ -103,9 +104,21 @@
         </div>
       </div>
     </section>
-  </div>
+    
 
+  </div>
+  <div class="device-container">
+    <button class="edit"><i class="fa-solid fa-circle-info"></i></button>
+        <nav class="devices">
+          <a href="#" class="device">Candy</a>
+          <a href="#" class="device">Ozzy</a>
+          <a href="#" class="device">Amy</a>
+        </nav>
+      <button class="edit add"><i class="fa-solid fa-plus"></i></button>
+    </div>
   <div class="overlay"></div>
+
+
 </body>
 
 </html>
