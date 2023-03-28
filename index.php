@@ -10,6 +10,8 @@
   <script defer type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/options_init.js"></script>
   <script type="text/javascript" src="js/device.js"></script>
+  <script type="text/javascript" src="js/popup_init.js"></script>
+  <script type="text/javascript" src="js/popup.js"></script>
   <script type="text/javascript" src="js/options.js"></script>
   <script type="text/javascript" src="js/plot_init.js"></script>
   <script type="text/javascript" src="js/plot.js"></script>
@@ -108,28 +110,31 @@
 
 
   </div>
-  <div id="modal-devices" class="modal">
-      <div class="modal-header">
-        <div class="title">Aggiungi dispositivo</div>
-        <button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="modal-body" id="modal" >
-        <form class="newDevice">
-          <input type="text" name="id" placeholder="codice scheda">
-          <input type="text" name="nome" placeholder="nome scheda">
-          <button id="add-device" class="btn">aggiungi</button>
+  <div class="popup-parent">
+    <div id="modal-devices" class="modal">
+        <div class="modal-header">
+          <div class="title">Aggiungi dispositivo</div>
+          <button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="modal" >
+          <form class="newDevice">
+            <input type="text" name="id" placeholder="codice scheda">
+            <input type="text" name="nome" placeholder="nome scheda">
+            <button id="add-device" class="btn">aggiungi</button>
 
-        </form>
+          </form>
 
+        </div>
       </div>
+    <div class="device-container">
+      <button class="edit"><i class="fa-solid fa-circle-info"></i></button>
+      <nav class="devices">
+        
+      </nav>
+      <button class="edit add open-popup"><i class="fa-solid fa-plus"></i></button>
     </div>
-  <div class="device-container">
-    <button class="edit"><i class="fa-solid fa-circle-info"></i></button>
-    <nav class="devices">
-
-    </nav>
-    <button class="edit add"><i class="fa-solid fa-plus"></i></button>
   </div>
+
   <div class="overlay"></div>
 
 

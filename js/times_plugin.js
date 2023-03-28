@@ -14,11 +14,40 @@
       let overlay = document.getElementsByClassName("overlay");
       let $overlay = $(overlay);
 
-      $openButton.on("click", function () {
+      $openButton.on("click", function (){
+        $overlay.addClass('send-on-click');
+      });
+      /*$openButton.on("click", function () {
         $this.find(".modal").addClass("active");
         $overlay.addClass("active");
+      });*/
+
+      $closeButton.on("click", function () {
+        let $form = $this.find(".newTimes");
+        var input = $("input.time-field", $form);
+        let html = "";
+
+        //invio del contenuto del popup al db
+        sendTimes($this);
+        /*$this.find(".modal").removeClass("active");
+        $overlay.removeClass("active");
+        close_pop_up($this);*/
       });
 
+      $overlay.on("click", function () {
+        if($(this).hasClass('send-on-click')) {
+          let $form = $this.find(".newTimes");
+          var input = $("input.time-field", $form);
+          let html = "";
+  
+          //invio del contenuto del popup al db
+          sendTimes($this);
+          $(this).removeClass('send-on-click');
+        } 
+        /*$this.find(".modal").removeClass("active");
+        $overlay.removeClass("active");
+        close_pop_up($this);*/
+      });
       $addButton.on("click", function () {
         let $field = $this.find(".newTimes");
         var count = $field.find("div.time").length;
@@ -31,17 +60,7 @@
         $field.append(html);
       });
 
-      $closeButton.on("click", function () {
-        $this.find(".modal").removeClass("active");
-        $overlay.removeClass("active");
-        close_pop_up($this);
-      });
 
-      $overlay.on("click", function () {
-        $this.find(".modal").removeClass("active");
-        $overlay.removeClass("active");
-        close_pop_up($this);
-      });
 
       $("body").on("click", ".remove", function () {
         let field = $(this).parent();
@@ -207,9 +226,9 @@
     function load_pop_up($el) {
       var classList = $el.attr("class");
       var classArr = classList.split(" ");
-      console.log(classArr[0]);
       let html =
-        '<button data-modal-target="#modalFood" class="edit open"><i class="fa-solid fa-pencil"></i></button>';
+      '<div class="popup-parent">'+
+        '<button data-modal-target="#modalFood" class="edit open open-popup"><i class="fa-solid fa-pencil"></i></button>';
       html +=
         '<div class="modal">' +
         '<div class="modal-header">' +
@@ -223,17 +242,18 @@
         "</form>" +
         '<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>' +
         "</div>" +
+        "</div>"+
         "</div>";
       $el.append(html);
     }
 
-    function close_pop_up($el) {
+    /*function close_pop_up($el) {
       let $form = $el.find(".newTimes");
       var input = $("input.time-field", $form);
       let html = "";
 
       //invio del contenuto del popup al db
       sendTimes($el);
-    }
+    }*/
   };
 })(jQuery);

@@ -417,14 +417,15 @@ canvas#plotPeso {
 .device{
   border-left: 2px grey solid;  
   padding-left: 5px;
+  padding-right: 5px;
 }
 
 .device:nth-child(1){
   border: none;
-  padding: 0;
 }
 
 .device:hover{
+  cursor: pointer;
   text-decoration: underline;
 }
 

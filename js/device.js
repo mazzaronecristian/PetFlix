@@ -1,24 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.querySelector("#modal-devices");
-    const overlay = document.querySelector('.overlay');
     const addDevice = document.querySelector('#add-device');
     const form = document.querySelector('.newDevice');
     const devices = document.querySelector('.devices');
-
-    $('.device-container button.add').on('click', function(){
-        $(modal).addClass('active');
-        $(overlay).addClass('active');
-    });
-
-    $('#modal-devices button.close-button').on('click', function(){
-        $(overlay).removeClass('active');
-        $(modal).removeClass('active');
-    });
-
-    $(overlay).on('click', function(){
-        $(overlay).removeClass('active');
-        $(modal).removeClass('active');
-    });
 
     $(addDevice).on('click', function(){
         var elements = form.elements;
@@ -47,14 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = "index.php";
             }
         });
-
     });
 
 
     loadDevice(devices);
 
     
-function loadDevice(devices){
+function loadDevice(location){
     var request = $.ajax({
         url: 'server/configureDevice.php',
         type: "POST",
@@ -65,8 +47,12 @@ function loadDevice(devices){
     });
 
     request.done(function (data) {
-        let html = '<a id="'+data['id']+'">'+data['nome']+'</a>';
-        console.log(html);
+        let devices = data['devices'];
+        let html = '';
+        $(devices).each(function (index, object) {
+            html += '<a class="device" id="'+object['id']+'">'+object['nome']+'</a>';
+          });
+        $(location).append(html);
     });
     request.fail(function (){
         console.log('fai schifo');
