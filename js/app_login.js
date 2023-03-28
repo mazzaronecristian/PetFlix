@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//TODO: verifica della validità delle credenziali di registrazione: email valida e conferma password
-
 function signup(serverURL) {
   emptyErrorLog();
   const signupForm = document.querySelector("#sign-up-form");

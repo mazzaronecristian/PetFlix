@@ -432,6 +432,14 @@ canvas#plotPeso {
   padding: 0 10px 0 10px;
 }
 
+.newDevice{
+  display: flex;
+  flex-direction: column;
+}
+.newDevice .btn{
+  background-color: var(--jungleGreen);
+}
+
 /* START TABLET RULES*/
 @media (max-width: 1000px) {
   .nuovi-pesi {

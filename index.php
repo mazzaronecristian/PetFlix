@@ -9,6 +9,7 @@
   <script type="text/javascript" src="js/times_plugin.js"></script>
   <script defer type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/options_init.js"></script>
+  <script type="text/javascript" src="js/device.js"></script>
   <script type="text/javascript" src="js/options.js"></script>
   <script type="text/javascript" src="js/plot_init.js"></script>
   <script type="text/javascript" src="js/plot.js"></script>
@@ -16,11 +17,11 @@
 </head>
 
 <body>
-<div class="logout-container">
-      <a href="server/closeSession.php">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
-    </div>
+  <div class="logout-container">
+    <a href="server/closeSession.php">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+  </div>
   <div class="container">
-    
+
 
     <div class="menu-container">
       <div class="menu">
@@ -104,18 +105,31 @@
         </div>
       </div>
     </section>
-    
+
 
   </div>
+  <div id="modal-devices" class="modal">
+      <div class="modal-header">
+        <div class="title">Aggiungi dispositivo</div>
+        <button data-close-button class="close-button"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modal" >
+        <form class="newDevice">
+          <input type="text" name="id" placeholder="codice scheda">
+          <input type="text" name="nome" placeholder="nome scheda">
+          <button id="add-device" class="btn">aggiungi</button>
+
+        </form>
+
+      </div>
+    </div>
   <div class="device-container">
     <button class="edit"><i class="fa-solid fa-circle-info"></i></button>
-        <nav class="devices">
-          <a href="#" class="device">Candy</a>
-          <a href="#" class="device">Ozzy</a>
-          <a href="#" class="device">Amy</a>
-        </nav>
-      <button class="edit add"><i class="fa-solid fa-plus"></i></button>
-    </div>
+    <nav class="devices">
+
+    </nav>
+    <button class="edit add"><i class="fa-solid fa-plus"></i></button>
+  </div>
   <div class="overlay"></div>
 
 
