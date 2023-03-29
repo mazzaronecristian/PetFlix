@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         var request = $.ajax({
-            url: 'server/configureDevice.php',
+            url: 'server/device.php',
             type: "POST",
             data: {
                 nome: deviceCredentials["nome"],
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 function loadDevice(location){
     var request = $.ajax({
-        url: 'server/configureDevice.php',
+        url: 'server/device.php',
         type: "POST",
         data: {
             action: "load"
