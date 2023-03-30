@@ -15,9 +15,9 @@
       $openButton.on("click", function(){
         let $field = $this.find(".newTimes");
         var count = $field.find("div.time").length;
-        if( count<=5 ){
-          $(this).removeClass('avoid-clicks');
-          $(this).removeClass('disabled');
+        if( count<5 ){
+          $addButton.removeClass('avoid-clicks');
+          $addButton.removeClass('disabled');
         }
       });
 
