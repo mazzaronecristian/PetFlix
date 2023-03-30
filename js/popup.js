@@ -15,12 +15,6 @@
                 $overlay.removeClass('active');
             });
 
-            $overlay.on('click', function(){
-                $popup.removeClass('active');
-                $overlay.removeClass('active');
-                console.log("CLOSED!");
-            });
-
             $openButton.on('click', function(){
                 console.log('OPENED!');
                 $popup.addClass('active');

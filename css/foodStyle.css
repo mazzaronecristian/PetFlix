@@ -24,6 +24,9 @@ a{
   color: black;
 }
 
+.disabled{
+  color: lightgray !important;
+}
 input,
 select {
   margin-bottom: 5px;

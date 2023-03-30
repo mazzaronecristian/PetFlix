@@ -8,20 +8,18 @@
     return this.each(function (i, obj) {
       let $this = $(this);
       load_pop_up($this);
-      let $openButton = $(".open", $this); //$this = .selezioneOrari
       let $addButton = $(".add", $this);
       let $closeButton = $(".close-button", $this);
-      let overlay = document.getElementsByClassName("overlay");
-      let $overlay = $(overlay);
+      let $openButton = $(".open-popup", $this);
 
-      $openButton.on("click", function (){
-        $overlay.addClass('send-on-click');
+      $openButton.on("click", function(){
+        let $field = $this.find(".newTimes");
+        var count = $field.find("div.time").length;
+        if( count<=5 ){
+          $(this).removeClass('avoid-clicks');
+          $(this).removeClass('disabled');
+        }
       });
-      
-      /*$openButton.on("click", function () {
-        $this.find(".modal").addClass("active");
-        $overlay.addClass("active");
-      });*/
 
       $closeButton.on("click", function () {
         let $form = $this.find(".newTimes");
@@ -30,29 +28,14 @@
 
         //invio del contenuto del popup al db
         sendTimes($this);
-        /*$this.find(".modal").removeClass("active");
-        $overlay.removeClass("active");
-        close_pop_up($this);*/
       });
 
-      $overlay.on("click", function () {
-        if($(this).hasClass('send-on-click')) {
-          let $form = $this.find(".newTimes");
-          var input = $("input.time-field", $form);
-          let html = "";
-  
-          //invio del contenuto del popup al db
-          sendTimes($this);
-          $(this).removeClass('send-on-click');
-        } 
-        /*$this.find(".modal").removeClass("active");
-        $overlay.removeClass("active");
-        close_pop_up($this);*/
-      });
       $addButton.on("click", function () {
         let $field = $this.find(".newTimes");
         var count = $field.find("div.time").length;
         if (count == 5) {
+          $(this).addClass('avoid-clicks');
+          $(this).addClass('disabled');
           alert("Non puoi programmare più di 5 pasti");
           return;
         }
@@ -60,8 +43,6 @@
           '<div class="time"><input class="time-field" type="time" value="00:00"><button type=\'button\' class="edit remove"><i class="fa-solid fa-minus"></i></button></div>';
         $field.append(html);
       });
-
-
 
       $("body").on("click", ".remove", function () {
         let field = $(this).parent();
@@ -105,7 +86,6 @@
       var flag = null;
       if (type == "cibo") flag = 0;
       if (type == "uscite") flag = 1;
-      console.log($el);
       $form.find(".time-field").each(function () {
         var time = $(this).val();
         var action = "update";
@@ -133,7 +113,7 @@
           console.log("DONE");
         });
         request.fail(function () {
-          console.log("fail");
+          alert("ERRORE NELLA REGISTRAZIONE DELL'ORARIO. Controlla che la scheda sia registrata correttamente, o che l'orario non sia già impostato.");
         });
       });
     }
@@ -249,13 +229,5 @@
       $el.append(html);
     }
 
-    /*function close_pop_up($el) {
-      let $form = $el.find(".newTimes");
-      var input = $("input.time-field", $form);
-      let html = "";
-
-      //invio del contenuto del popup al db
-      sendTimes($el);
-    }*/
   };
 })(jQuery);
