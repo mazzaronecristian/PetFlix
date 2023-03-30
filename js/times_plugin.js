@@ -158,8 +158,8 @@
         handleLoadInPopUp(data, $el.find("form.newTimes"));
       });
 
-      request.fail(function (jqXHR, textStatus) {
-        alert("Request failed: " + textStatus);
+      request.fail(function (jqXHR, textStatus, data) {
+        alert("Request failed: "+ data);
       });
     }
 

@@ -28,20 +28,20 @@ switch ($action) {
 function loadData()
 {	
 	session_start();
+	$times = array();
 
-	$device = $_SESSION['device'];
-	if (isset($_POST['flag'])) {
+	if (isset($_POST['flag']) && isset($_SESSION['device'])) {
 		$flag = $_POST['flag'];
+		$device = $_SESSION['device'];
 	} else {
-		echo "you didn't specify a type";
+		$response = array('times' => $times);
+		echo json_encode($response);
 		return;
 	}
-	$query_string = "SELECT id, controlFlag, time_format(time, '%H:%i') as time FROM orari WHERE controlFlag=$flag AND scheda = $device  ORDER BY time ASC";
+	$query_string = "SELECT id, controlFlag, time_format(time, '%H:%i') as time FROM orari WHERE controlFlag=$flag AND scheda =$device  ORDER BY time ASC";
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
 	$result = $mysqli->query($query_string);
-
-	$times = array();
 
 	while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 		$row_id = $row['id'];
@@ -61,12 +61,11 @@ function loadData()
 function insertData()
 {
 	session_start();
-	$device = $_SESSION['device'];
-
-	if (isset($_POST['time'])) {
+	if(isset($_SESSION['device']) && isset($_POST['time'])){
 		$time = $_POST['time'];
-	} else {
-		echo "you didn't specify a text";
+		$device = $_SESSION['device'];
+	}else{
+		echo "device non impostato";
 		return;
 	}
 
@@ -109,9 +108,9 @@ function insertData()
 function updateData()
 {
 	session_start();
-	$device = $_SESSION['device'];
 
-	if (isset($_POST['time'])) {
+	if (isset($_POST['time']) && isset($_SESSION['device'])) {
+		$device = $_SESSION['device'];
 		$time = $_POST['time'];
 	} else {
 		echo "you didn't specify a text";
@@ -158,10 +157,11 @@ function updateData()
 function removeData()
 {
 	session_start();
-	$device = $_SESSION['device'];
-
-	if (isset($_POST["id"]))
+	
+	if (isset($_POST["id"])&& isset($_SESSION['device'])){
 		$id = $_POST["id"];
+		$device = $_SESSION['device'];
+	}
 	else {
 		echo "errore, id non specificato";
 		return;
