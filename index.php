@@ -1,4 +1,11 @@
-<?php require("server/session.php"); ?>
+<?php 
+  if(isset($_GET['device'])){
+    session_start();
+    $_SESSION['device'] = $_GET['device'];
+  }
+  require("server/session.php");
+
+?>
 <!DOCTYPE html>
 <html>
 

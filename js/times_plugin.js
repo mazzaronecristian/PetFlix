@@ -17,6 +17,7 @@
       $openButton.on("click", function (){
         $overlay.addClass('send-on-click');
       });
+      
       /*$openButton.on("click", function () {
         $this.find(".modal").addClass("active");
         $overlay.addClass("active");
@@ -104,6 +105,7 @@
       var flag = null;
       if (type == "cibo") flag = 0;
       if (type == "uscite") flag = 1;
+      console.log($el);
       $form.find(".time-field").each(function () {
         var time = $(this).val();
         var action = "update";

@@ -35,27 +35,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadDevice(devices);
 
-    
-function loadDevice(location){
-    var request = $.ajax({
-        url: 'server/device.php',
-        type: "POST",
-        data: {
-            action: "load"
-        },
-        dataType: "json",
-    });
+    function loadDevice(location){
+        var request = $.ajax({
+            url: 'server/device.php',
+            type: "POST",
+            data: {
+                action: "load"
+            },
+            dataType: "json",
+        });
 
-    request.done(function (data) {
-        let devices = data['devices'];
-        let html = '';
-        $(devices).each(function (index, object) {
-            html += '<a class="device" id="'+object['id']+'">'+object['nome']+'</a>';
-          });
-        $(location).append(html);
-    });
-    request.fail(function (){
-        console.log('fai schifo');
-    });
-}
+        request.done(function (data) {
+            let devices = data['devices'];
+            let html = '';
+            $(devices).each(function (index, object) {
+                html += '<a class="device" id="'+object['id']+'" onclick="activeDevice(this.id)">'+object['nome']+'</a>';
+                });
+            $(location).append(html);
+        });
+        request.fail(function (){
+            //TODO TOGLI IL CONSOLE LOG
+            console.log('fai schifo');
+        });
+    }
+
 });
+
+function activeDevice(device){
+    console.log('active device');
+    window.location.href = "index.php?device=" + device;
+
+}

@@ -26,14 +26,17 @@ switch ($action) {
 }
 
 function loadData()
-{
+{	
+	session_start();
+
+	$device = $_SESSION['device'];
 	if (isset($_POST['flag'])) {
 		$flag = $_POST['flag'];
 	} else {
 		echo "you didn't specify a type";
 		return;
 	}
-	$query_string = "SELECT id, controlFlag, time_format(time, '%H:%i') as time FROM orari WHERE controlFlag=$flag ORDER BY time ASC";
+	$query_string = "SELECT id, controlFlag, time_format(time, '%H:%i') as time FROM orari WHERE controlFlag=$flag AND scheda = $device  ORDER BY time ASC";
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
 	$result = $mysqli->query($query_string);
@@ -57,6 +60,9 @@ function loadData()
 
 function insertData()
 {
+	session_start();
+	$device = $_SESSION['device'];
+
 	if (isset($_POST['time'])) {
 		$time = $_POST['time'];
 	} else {
@@ -66,7 +72,7 @@ function insertData()
 
 	$flag = $_POST['flag'];
 
-	$query_string = "SELECT * FROM orari WHERE controlFlag=$flag AND time= '" . htmlspecialchars($time) . "'";
+	$query_string = "SELECT * FROM orari WHERE controlFlag=$flag AND scheda = $device AND time= '" . htmlspecialchars($time) . "'";
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 	$result = $mysqli->query($query_string);
 	$row = $result->fetch_array(MYSQLI_ASSOC);
@@ -76,11 +82,11 @@ function insertData()
 		return;
 	}
 
-	$query_string = "INSERT INTO orari (controlFlag, time) values ($flag, '" . htmlspecialchars($time) . "')";
+	$query_string = "INSERT INTO orari (controlFlag, scheda, time) values ($flag, $device, '" . htmlspecialchars($time) . "')";
 	$result = $mysqli->query($query_string);
 
 	//ritorno il dato appena inserito per poterlo aggiungere alla schermata del sito e al popup
-	$query_string = "SELECT id, controlFlag, time_format(time, '%H:%i') as time FROM orari WHERE controlFlag=$flag AND time= '" . htmlspecialchars($time) . "'";
+	$query_string = "SELECT id, controlFlag, time_format(time, '%H:%i') as time FROM orari WHERE controlFlag=$flag AND scheda = $device AND time= '" . htmlspecialchars($time) . "'";
 	$result = $mysqli->query($query_string);
 
 	$times = array();
@@ -102,6 +108,9 @@ function insertData()
 
 function updateData()
 {
+	session_start();
+	$device = $_SESSION['device'];
+
 	if (isset($_POST['time'])) {
 		$time = $_POST['time'];
 	} else {
@@ -113,7 +122,7 @@ function updateData()
 	$id = $_POST['id'];
 	$time = $_POST['time'];
 
-	$query_string = "SELECT * FROM orari WHERE id=$id";
+	$query_string = "SELECT * FROM orari WHERE id=$id AND scheda = $device";
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 	$result = $mysqli->query($query_string);
 
@@ -127,7 +136,7 @@ function updateData()
 	$query_string = "UPDATE orari SET time='" . htmlspecialchars($time) . "' WHERE id = $id";
 	$result = $mysqli->query($query_string);
 
-	$query_string = "SELECT id, controlFlag, time_format(time, '%H:%i') as time FROM orari WHERE controlFlag=$flag AND time= '" . htmlspecialchars($time) . "'";
+	$query_string = "SELECT id, controlFlag, time_format(time, '%H:%i') as time FROM orari WHERE controlFlag=$flag AND scheda = $device AND time= '" . htmlspecialchars($time) . "'";
 	$result = $mysqli->query($query_string);
 	$times = array();
 
@@ -148,6 +157,9 @@ function updateData()
 
 function removeData()
 {
+	session_start();
+	$device = $_SESSION['device'];
+
 	if (isset($_POST["id"]))
 		$id = $_POST["id"];
 	else {
@@ -155,7 +167,7 @@ function removeData()
 		return;
 	}
 
-	$query_string = "DELETE FROM orari WHERE id=$id";
+	$query_string = "DELETE FROM orari WHERE id=$id AND scheda = $device";
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 	$result = $mysqli->query($query_string);
 
