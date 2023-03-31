@@ -26,8 +26,14 @@ switch ($action) {
 }
 
 function loadData(){
-    
-    $query_string = "SELECT weight, date FROM pesi order by date";
+    session_start();
+	if( isset($_SESSION['device']) )
+		$device = $_SESSION['device'];
+	else{
+		echo 'device non impostato';
+		return;
+	}
+    $query_string = "SELECT weight, date FROM pesi WHERE scheda = $device order by date";
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
     $result = $mysqli->query($query_string);
@@ -48,15 +54,24 @@ function loadData(){
 }
 
 function insertData(){
+
+	session_start();
+	if( isset($_SESSION['device']) )
+		$device = $_SESSION['device'];
+	else{
+		echo 'device non impostato';
+		return;
+	}
+	
     $weight = $_POST['weight'];
     $date = $_POST['date'];
 
-    $query_string = "INSERT INTO pesi (weight, date) values ($weight, '" . htmlspecialchars($date) . "')";
+    $query_string = "INSERT INTO pesi (weight, scheda,date) values ($weight, $device , '" . htmlspecialchars($date) . "')";
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
     $result = $mysqli->query($query_string);
 
-    $query_string = "SELECT * FROM pesi order by date asc";
+    $query_string = "SELECT * FROM pesi WHERE scheda = $device order by date asc";
 	$result = $mysqli->query($query_string);
 
     $weights = array();

@@ -6,12 +6,29 @@
   --kingBlue: #455d73;
 }
 
-.avoid-clicks {
-  pointer-events: none;
-}
+
 
 /* START GENERAL RULES*/
 
+.disabled{
+  color: lightgray !important;
+}
+.avoid-clicks {
+  pointer-events: none;
+}
+.invisible{
+  display: none !important;
+}
+
+#device-msg{
+  position: fixed;
+  color: var(--jungleGreen);
+  left: 30%;
+  transform: translateX(-50%);
+  top: 40\%;
+  z-index: 200;
+
+}
 * {
   padding: 0;
   margin: 0;
@@ -24,9 +41,7 @@ a{
   color: black;
 }
 
-.disabled{
-  color: lightgray !important;
-}
+
 input,
 select {
   margin-bottom: 5px;
@@ -458,6 +473,10 @@ canvas#plotPeso {
 /* START MOBILE RULES*/
 
 @media (max-width: 870px) {
+  #device-msg{
+    left: 50%;
+    top: 50%;
+  }
   .edit i {
     font-size: 25px;
   }

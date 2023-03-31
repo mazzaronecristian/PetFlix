@@ -45,6 +45,7 @@
       <img src="images/navbar.svg" />
     </div>
 
+    <div id="info-body">
     <section id="food-info" class="info-left info-active">
       <div class="info-container">
         <!-- cibo-->
@@ -116,6 +117,8 @@
     </section>
 
 
+    </div>
+
   </div>
   <div class="popup-parent">
     <div id="modal-devices" class="modal">
@@ -143,6 +146,29 @@
   </div>
 
   <div class="overlay"></div>
+  <?php 
+    if ( isset($_SESSION['device']) ){
+      ?>
+      <script>
+        $('#info-body').removeClass('avoid-clicks');
+        $('#info-body').removeClass('invisible');
+        $('#device-msg').remove();
+
+      </script>
+      <?php
+    }
+    else {
+      ?>
+      <script>
+        $('#info-body').addClass('avoid-clicks');
+        $('#info-body').addClass('invisible');
+        let html = '<h3 id="device-msg">Seleziona un dispositivo</h3>';
+        $('body').prepend(html);
+      </script>
+      <?php
+    }
+
+  ?>
 
 
 </body>
