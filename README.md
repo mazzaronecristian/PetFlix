@@ -15,7 +15,7 @@ Questa **repository** contiene il codice sorgente per **l'applicazione web** (al
 
 - Prima di tutto si seleziona la taglia del proprio animale e gli orari di erogazione dei croccantini. 
 
-![gif orari cibo]()
+![gif orari cibo](http://g.recordit.co/erkW5BQXeh.gif)
 
 -Possibilità di escludere gli orari tramite switch ed erogarlo manualmente attraverso pulsante **CIBO!**
 
@@ -23,11 +23,10 @@ Questa **repository** contiene il codice sorgente per **l'applicazione web** (al
 
 - In questa sezione è possibile tenere sotto controllo il peso dell'animale nel tempo attraverso un grafico.
 
-![gif GRAFICO PESI]()
+![gif GRAFICO PESI](http://g.recordit.co/dLEK2E2GmT.gif)
 
 - E Programmare gli orari di uscita o momenti di svago tramite notifiche acustiche emesse dalla stazione tramite un Buzzer passivo integrato. 
 
-![gif orari USCITE]()
 
 ## Pulsante SOS
 
