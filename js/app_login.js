@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//TODO: verifica della validità delle credenziali di registrazione: email valida e conferma password
-
 function signup(serverURL) {
   emptyErrorLog();
   const signupForm = document.querySelector("#sign-up-form");
@@ -47,7 +45,10 @@ function signup(serverURL) {
 
     request.done(function (data) {
       if (!data) alert("email già in uso");
-      else alert("registrazione avvenuta con successo");
+      else{
+        alert("registrazione avvenuta con successo");
+        window.location.href = "index.php";
+      }
     });
   }
 }

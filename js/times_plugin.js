@@ -8,39 +8,40 @@
     return this.each(function (i, obj) {
       let $this = $(this);
       load_pop_up($this);
-      let $openButton = $(".open", $this); //$this = .selezioneOrari
       let $addButton = $(".add", $this);
       let $closeButton = $(".close-button", $this);
-      let overlay = document.getElementsByClassName("overlay");
-      let $overlay = $(overlay);
+      let $openButton = $(".open-popup", $this);
 
-      $openButton.on("click", function () {
-        $this.find(".modal").addClass("active");
-        $overlay.addClass("active");
+      $openButton.on("click", function(){
+        let $field = $this.find(".newTimes");
+        var count = $field.find("div.time").length;
+        if( count<5 ){
+          $addButton.removeClass('avoid-clicks');
+          $addButton.removeClass('disabled');
+        }
+      });
+
+      $closeButton.on("click", function () {
+        let $form = $this.find(".newTimes");
+        var input = $("input.time-field", $form);
+        let html = "";
+
+        //invio del contenuto del popup al db
+        sendTimes($this);
       });
 
       $addButton.on("click", function () {
         let $field = $this.find(".newTimes");
         var count = $field.find("div.time").length;
         if (count == 5) {
+          $(this).addClass('avoid-clicks');
+          $(this).addClass('disabled');
           alert("Non puoi programmare più di 5 pasti");
           return;
         }
         let html =
           '<div class="time"><input class="time-field" type="time" value="00:00"><button type=\'button\' class="edit remove"><i class="fa-solid fa-minus"></i></button></div>';
         $field.append(html);
-      });
-
-      $closeButton.on("click", function () {
-        $this.find(".modal").removeClass("active");
-        $overlay.removeClass("active");
-        close_pop_up($this);
-      });
-
-      $overlay.on("click", function () {
-        $this.find(".modal").removeClass("active");
-        $overlay.removeClass("active");
-        close_pop_up($this);
       });
 
       $("body").on("click", ".remove", function () {
@@ -112,7 +113,7 @@
           console.log("DONE");
         });
         request.fail(function () {
-          console.log("fail");
+          alert("ERRORE NELLA REGISTRAZIONE DELL'ORARIO. Controlla che la scheda sia registrata correttamente, o che l'orario non sia già impostato.");
         });
       });
     }
@@ -137,8 +138,8 @@
         handleLoadInPopUp(data, $el.find("form.newTimes"));
       });
 
-      request.fail(function (jqXHR, textStatus) {
-        alert("Request failed: " + textStatus);
+      request.fail(function (jqXHR, textStatus, data) {
+        alert("Request failed: "+ data);
       });
     }
 
@@ -207,9 +208,9 @@
     function load_pop_up($el) {
       var classList = $el.attr("class");
       var classArr = classList.split(" ");
-      console.log(classArr[0]);
       let html =
-        '<button data-modal-target="#modalFood" class="edit open"><i class="fa-solid fa-pencil"></i></button>';
+      '<div class="popup-parent">'+
+        '<button data-modal-target="#modalFood" class="edit open open-popup"><i class="fa-solid fa-pencil"></i></button>';
       html +=
         '<div class="modal">' +
         '<div class="modal-header">' +
@@ -223,17 +224,10 @@
         "</form>" +
         '<button data-add-time-field class="edit add"><i class="fa-solid fa-plus"></i></button>' +
         "</div>" +
+        "</div>"+
         "</div>";
       $el.append(html);
     }
 
-    function close_pop_up($el) {
-      let $form = $el.find(".newTimes");
-      var input = $("input.time-field", $form);
-      let html = "";
-
-      //invio del contenuto del popup al db
-      sendTimes($el);
-    }
   };
 })(jQuery);

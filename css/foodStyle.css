@@ -6,18 +6,41 @@
   --kingBlue: #455d73;
 }
 
-.avoid-clicks {
-  pointer-events: none;
-}
+
 
 /* START GENERAL RULES*/
 
+.disabled{
+  color: lightgray !important;
+}
+.avoid-clicks {
+  pointer-events: none;
+}
+.invisible{
+  display: none !important;
+}
+
+#device-msg{
+  position: fixed;
+  color: var(--jungleGreen);
+  left: 30%;
+  transform: translateX(-50%);
+  top: 40%;
+  z-index: 200;
+
+}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", Helvetica, sans-serif;
 }
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
 
 input,
 select {
@@ -84,7 +107,7 @@ form {
 .container {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
   background-color: #fff;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -102,7 +125,22 @@ form {
   border-radius: 50%;
   z-index: 10;
 }
+.logout-container {
+  position: absolute;
+  left: 93%;
+  z-index: 11;
+  font-weight: 300;
+}
 
+.logout-container *{
+  text-decoration: none;
+  color: #fff;
+  transition: 0.5s;
+}
+
+a:hover{
+  text-decoration: underline;
+}
 .menu-container {
   position: fixed;
   top: 20%;
@@ -154,6 +192,7 @@ form {
   left: 120%;
   height: auto;
   transition: 0.4s;
+  margin-top: 50px;
 }
 
 .info-left {
@@ -161,6 +200,7 @@ form {
   left: -120%;
   height: auto;
   transition: 0.4s;
+  margin-top: 50px;
 }
 
 .info-container {
@@ -368,6 +408,51 @@ canvas#plotPeso {
 }
 
 /* END POP-UP RULES*/
+/*START DEVICES RULES*/
+.device-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  width: auto;
+  min-width: 200px;
+  max-width: 400px;
+  left : 50%;
+  transform: translateX(-50%);
+  top :90%;
+}
+
+.device{
+  border-left: 2px grey solid;  
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.device:nth-child(1){
+  border: none;
+}
+
+.device:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.device-container .add{
+  padding: 0 10px 0 10px;
+}
+
+.newDevice{
+  display: flex;
+  flex-direction: column;
+}
+.newDevice .btn{
+  background-color: var(--jungleGreen);
+}
+
+/* START TABLET RULES*/
 @media (max-width: 1000px) {
   .nuovi-pesi {
     flex-direction: column;
@@ -381,8 +466,31 @@ canvas#plotPeso {
 /* START MOBILE RULES*/
 
 @media (max-width: 870px) {
+  #device-msg{
+    left: 50%;
+    transform: translateX(-30%);
+    top: 50%;
+    min-width: 400px;
+  }
   .edit i {
     font-size: 25px;
+  }
+
+  .device-container{
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .logout-container{
+    width: fit-content;
+    position: fixed;
+    top: 90%;
+    transform: translateX(-100%);
+  }
+
+  .logout-container *{
+    color: var(--jungleGreen);
+
   }
 
   .nuovi-pesi {

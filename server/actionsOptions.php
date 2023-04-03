@@ -25,9 +25,16 @@ switch ($action) {
 }
 
 function loadData(){
-    $id = $_POST['id'];
+    session_start();
+    if( isset($_POST['id']) && isset($_SESSION['device']) ){
+        $id = $_POST['id'];
+        $device = $_SESSION['device'];
+    }else{
+        echo 'device non impostato';
+        return;
+    }
 
-    $query_string = "SELECT state FROM impostazioni WHERE id = '$id'";
+    $query_string = "SELECT state FROM impostazioni WHERE id = '$id' AND scheda='$device'";
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $result = $mysqli->query($query_string);
     $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -38,10 +45,19 @@ function loadData(){
 }
 
 function insertData(){
-    $id = $_POST['id'];
+
+    session_start();
+    if( isset($_POST['id']) && isset($_SESSION['device']) ){
+        $id = $_POST['id'];
+        $device = $_SESSION['device'];
+    }else{
+        echo 'device non impostato';
+        return;
+    }
+
     $state = $_POST['state'];
 
-    $query_string = "SELECT id FROM impostazioni WHERE  id = $id";
+    $query_string = "SELECT id FROM impostazioni WHERE  id = $id AND scheda = $device";
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $result = $mysqli->query($query_string);
 
@@ -49,15 +65,15 @@ function insertData(){
 
 
     if ($row != null) {
-        $query_string = "UPDATE impostazioni SET state = $state WHERE id = $id";
+        $query_string = "UPDATE impostazioni SET state = $state WHERE id = $id AND scheda = $device";
         $result = $mysqli->query($query_string);
     }
     else{
-        $query_string = "INSERT INTO impostazioni values ($id, $state)";
+        $query_string = "INSERT INTO impostazioni (id, state, scheda) values ($id, $state, $device)";
         $result = $mysqli->query($query_string);
     } 
 
-    $query_string = "SELECT * FROM impostazioni WHERE id = $id";
+    $query_string = "SELECT * FROM impostazioni WHERE id = $id AND scheda = $device";
     $result = $mysqli->query($query_string);
 
     $states = array();
