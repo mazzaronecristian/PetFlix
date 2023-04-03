@@ -1,5 +1,3 @@
-//VERSIONE 1.6 con WATCHDOG per notifica
-
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <Arduino_JSON.h>
@@ -322,6 +320,10 @@ void httpPOSTRequest(const char* serverName, String httpRequestData) {
 String httpGETRequest(const char* serverName, String httpRequestData) {
   WiFiClient client;
   HTTPClient http;
+
+  //Domain for the request with GET DATAS
+  httpRequestData = "?"+httpRequestData;
+  String serverPath = serverName + httpRequestData;
   
   // Your Domain name with URL path or IP address with path
   http.begin(client, serverName);
