@@ -23,7 +23,7 @@
 //#define PASSWORD "paranoia"
 //Cell Cristian WI-FI
 #define NOME_RETE "Galaxy di Cristian"
-#define PASSWORD "wwuy2511"
+#define PASSWORD "seai5516"
 
 #define SERVER_TIMES "http://petflix.altervista.org/server/actionsArduino.php"
 #define SERVER_OPTIONS "http://petflix.altervista.org/server/actionsOptionsArduino.php"
@@ -36,6 +36,7 @@
 //3 seconds WDT
 #define WDT_TIMEOUT 3
 
+const String device = "device=8800";
 // notes in the melody:
 int melody[] = {
   NOTE_C5, NOTE_C5, NOTE_C5, NOTE_G4, NOTE_A4, NOTE_A4, NOTE_G4, NOTE_G4, NOTE_E5, NOTE_E5, NOTE_D5, NOTE_D5, NOTE_C5, NOTE_C5};
@@ -156,7 +157,7 @@ void loop() {
   if ((millis() - lastTime) > timerDelay) {
     //Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED){
-      optionReadings = httpGETRequest(SERVER_OPTIONS);
+      optionReadings = httpGETRequest(SERVER_OPTIONS, device);
 
       JSONVar myOptions = JSON.parse(optionReadings);
 
@@ -211,11 +212,11 @@ void loop() {
       if(retard != 0){       //doesn't give food if the size is not set 
         if(controlFoodBtn.value == possibleValues[1]){                //gives food if the button "food" is pressed
           giveFood(retard); 
-          String httpRequestData = "id=103&state=0";
+          String httpRequestData = "id=103&state=0&"+device;
           httpPOSTRequest(SERVER_OPTIONS_POST, httpRequestData);
         }
         else if(controlFoodSwc.value == possibleValues[1]){          //gives food (based on times) only if the switch is ON
-          timeReadings = httpGETRequest(SERVER_TIMES);
+          timeReadings = httpGETRequest(SERVER_TIMES, device);
           JSONVar myTimes = JSON.parse(timeReadings);
   
           // JSON.typeof(jsonVar) can be used to get the type of the var
@@ -249,7 +250,7 @@ void loop() {
       }
       
       if(controlWalkSwc.value == possibleValues[1]){      //walk switch active
-        timeReadings = httpGETRequest(SERVER_WALKS);
+        timeReadings = httpGETRequest(SERVER_WALKS, device);
         JSONVar myTimes = JSON.parse(timeReadings);
 
         // JSON.typeof(jsonVar) can be used to get the type of the var
@@ -318,7 +319,7 @@ void httpPOSTRequest(const char* serverName, String httpRequestData) {
   http.end(); //free resources
 }
 
-String httpGETRequest(const char* serverName) {
+String httpGETRequest(const char* serverName, String httpRequestData) {
   WiFiClient client;
   HTTPClient http;
   
@@ -326,7 +327,7 @@ String httpGETRequest(const char* serverName) {
   http.begin(client, serverName);
   
   // Send HTTP GET request
-  int httpResponseCode = http.GET();
+  int httpResponseCode = http.GET(httpRequestData);
   
   String payload = "{}";
   

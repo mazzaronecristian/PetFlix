@@ -3,7 +3,9 @@ header("Access-Controll-Allow-Methods: GET");
 header('Content-Type: text/json');
 include("config.php");
 //* query orari
-$query_string = "SELECT time_format(time, '%H:%i') as time FROM orari WHERE controlFlag = 0";
+
+$device = $_GET['id'];
+$query_string = "SELECT time_format(time, '%H:%i') as time FROM orari WHERE controlFlag = 0 AND scheda = '$device'";
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 $result = $mysqli->query($query_string);
 
