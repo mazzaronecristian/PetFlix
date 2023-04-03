@@ -32,5 +32,6 @@ Questa **repository** contiene il codice sorgente per **l'applicazione web** (al
 
 - Consente di accedere rapidamente ai veterinari nella zona con un reindirizzamento automatico su google maps, per agire tempestivamente di caso di emergenze.
 
+
 ![gif_sos](http://g.recordit.co/8YjyAu1ro2.gif)
 
