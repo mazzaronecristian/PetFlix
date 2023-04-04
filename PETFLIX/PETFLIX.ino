@@ -329,7 +329,7 @@ String httpGETRequest(const char* serverName, String httpRequestData) {
   http.begin(client, serverName);
   
   // Send HTTP GET request
-  int httpResponseCode = http.GET(httpRequestData);
+  int httpResponseCode = http.GET();
   
   String payload = "{}";
   
