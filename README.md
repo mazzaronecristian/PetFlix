@@ -9,7 +9,7 @@ Questa **repository** contiene il codice sorgente per **l'applicazione web** (al
 ## Applicazione WEB
 - Dopo essersi registrati tramite **Username** e **Password** bisogna selezionare (o registrare) un dispositivo tramite **ID SCHEDA** e **Nome del proprio animale** 
 
-![gif ingresso](http://g.recordit.co/TpauFryWwc.gif)
+![gif ingresso](http://g.recordit.co/pE2lMzwfsQ.gif)
 
 ## Sezione CIBO
 
