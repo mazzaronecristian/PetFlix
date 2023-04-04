@@ -1,3 +1,6 @@
+const factor = 2000;
+
+
 function sendOptionConfiguration(id, state){
     console.log("🚀 ~ file: size.js:16 ~ selectChange ~ impostazione", state);
     var request = $.ajax({
@@ -16,6 +19,14 @@ function sendOptionConfiguration(id, state){
       request.fail(function () {
         console.log("fail");
       });
+}
+
+function toMillis(value) {
+  return value*factor;
+}
+
+function toSize(value) {
+  return value/factor;
 }
 
 (function($){
@@ -78,7 +89,7 @@ function sendOptionConfiguration(id, state){
   
     return this.each(function(i, obj){
       this.addEventListener("change",() =>{
-        sendOptionConfiguration($(this).attr("id"),this.value);
+        sendOptionConfiguration($(this).attr("id"), toMillis(this.value));
       });
       
       loadOptions(this);
@@ -96,16 +107,14 @@ function sendOptionConfiguration(id, state){
         dataType: "json"
       });
       request.done(function (data) {
-        console.log("🚀 ~ file: options.js:46 ~ data", data);
-        handleLoad(data, item);
+        handleLoad(toSize(data["state"]), item);
       });
       request.fail(function () {
         console.log("fail");
       });
     }
 
-    function handleLoad(data, item) {
-      var state = data["state"];
+    function handleLoad(state, item) {
       item.value = state;
     }
   }

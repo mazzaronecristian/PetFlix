@@ -127,9 +127,10 @@ form {
 }
 .logout-container {
   position: absolute;
-  left: 93%;
+  left: 97%;
   z-index: 11;
   font-weight: 300;
+  font-size: 30px
 }
 
 .logout-container *{
@@ -416,9 +417,9 @@ canvas#plotPeso {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  position: relative;
+  position: fixed;
   width: auto;
-  min-width: 200px;
+  min-width: 300px;
   max-width: 400px;
   left : 50%;
   transform: translateX(-50%);

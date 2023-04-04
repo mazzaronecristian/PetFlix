@@ -1,5 +1,5 @@
 <?php
-header("Access-Controll-Allow-Methods: POST");
+/*header("Access-Controll-Allow-Methods: POST");
 header('Content-Type: text/json');
 include("config.php");
 
@@ -23,5 +23,5 @@ $row = $result->fetch_array(MYSQLI_ASSOC);
 
 $response = array("value" => $row);
 
-echo json_encode($response);
+echo json_encode($response);*/
 ?>

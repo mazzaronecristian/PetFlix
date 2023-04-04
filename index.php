@@ -27,7 +27,7 @@
 
 <body>
   <div class="logout-container">
-    <a href="server/closeSession.php">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+    <a href="server/closeSession.php"><i class="fa-solid fa-right-from-bracket"></i></a>
   </div>
   <div class="container">
 
@@ -130,7 +130,8 @@
           <form class="newDevice">
             <input type="text" name="id" placeholder="codice scheda">
             <input type="text" name="nome" placeholder="nome scheda">
-            <button id="add-device" class="btn">aggiungi</button>
+            <button type="button" id="add-device" class="btn">aggiungi</button>
+
           </form>
 
         </div>
