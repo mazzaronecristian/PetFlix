@@ -131,7 +131,6 @@
             <input type="text" name="id" placeholder="codice scheda">
             <input type="text" name="nome" placeholder="nome scheda">
             <button id="add-device" class="btn">aggiungi</button>
-
           </form>
 
         </div>

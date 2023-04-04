@@ -23,7 +23,7 @@ if(isset($_COOKIE['email'])&&isset($_COOKIE['password'])){
       <div class="forms-container">
         <div class="signin-signup">
           <form method="POST" action="server/authentication.php" class="sign-in-form">
-            <h2 class="title">Sign in</h2>
+            <h2 class="title">Accedi</h2>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
               <input type="email" name="email" placeholder="Email" />
@@ -41,10 +41,10 @@ if(isset($_COOKIE['email'])&&isset($_COOKIE['password'])){
                   <?php
                 }
             ?>
-            <input type="submit" value="Login" class="btn solid" />
+            <input type="submit" value="accedi" class="btn solid" />
           </form>
           <form id="sign-up-form" class="sign-up-form">
-            <h2 class="title">Sign up</h2>
+            <h2 class="title">Registrati</h2>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
               <input type="email" name="email" placeholder="Email" />
@@ -59,7 +59,7 @@ if(isset($_COOKIE['email'])&&isset($_COOKIE['password'])){
             </div>
             <div id="errorSection">
             </div>
-            <input type="button" name="registrazione" onclick="signup('server/registration.php')" class="btn" value="Sign up"/>
+            <input type="button" name="registrazione" onclick="signup('server/registration.php')" class="btn" value="Registrati"/>
           </form>
         </div>
       </div>
@@ -67,26 +67,24 @@ if(isset($_COOKIE['email'])&&isset($_COOKIE['password'])){
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
-            <h3>New here ?</h3>
+            <h3>Sei nuovo?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+              crea un account e inizia la tua esperienza con PetFlix
             </p>
             <button class="btn transparent" id="sign-up-btn">
-              Sign up
+              Registrati
             </button>
           </div>
           <img src="images/log.svg" class="image" alt="" />
         </div>
         <div class="panel right-panel">
           <div class="content">
-            <h3>One of us ?</h3>
+            <h3>Uno di noi ?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+              Bentornato! Accedi e prenditi cura del tuo compagno
             </p>
             <button class="btn transparent" id="sign-in-btn">
-              Sign in
+              accedi
             </button>
           </div>
           <img src="images/register.svg" class="image" alt="" />
