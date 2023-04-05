@@ -34,7 +34,9 @@
 //3 seconds WDT
 #define WDT_TIMEOUT 3
 
+//device's id. The system use this id to take the correct set of data
 const String device = "device=8800";
+
 // notes in the melody:
 int melody[] = {
   NOTE_C5, NOTE_C5, NOTE_C5, NOTE_G4, NOTE_A4, NOTE_A4, NOTE_G4, NOTE_G4, NOTE_E5, NOTE_E5, NOTE_D5, NOTE_D5, NOTE_C5, NOTE_C5};
@@ -43,16 +45,17 @@ int duration = 400;  // 400 miliseconds
 Servo myservo;  // create servo object to control a servo
 
 void giveFood(int retard) {
-  Serial.println("EROGAZIONE CIBO!!!");
+  //TODO togliere print inutili
+  Serial.println( "EROGAZIONE CIBO!!!" );
   for (int pos = 0; pos <= 120; pos += 1) { // goes from 0 degrees to 120 degrees
     // in steps of 1 degree
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
     delay(1);                       // waits 15ms for the servo to reach the position
   }
   delay(retard);                    //retard based on the pet's size 
-  for (int pos = 120; pos >= 0; pos -= 1) { // goes from 120 degrees to 0 degrees 
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(1);                       // waits 15ms for the servo to reach the position
+  for ( int pos = 120; pos >= 0; pos -= 1 ) { // goes from 120 degrees to 0 degrees 
+    myservo.write( pos );              // tell servo to go to position in variable 'pos'
+    delay( 1 );                       // waits 15ms for the servo to reach the position
   }
 }
 
@@ -83,22 +86,26 @@ OptionsReadings controlFoodSwc= {"impostazione102", "1"};
 OptionsReadings controlFoodBtn = {"impostazione103", "0"};
 OptionsReadings controlWalkSwc= {"impostazione202", "1"};
 
-JSONVar possibleValues[] = {"0", "1", "2", "3"};
+
+//TODO controllare che switchStatus vada bene scritto così
+JSONVar switchStatus[] = {"0", "1"};
+
+//JSONVar switchStatus[] = {"0", "1", "2", "3"};
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin( 115200 );
 
-  myservo.attach(25);
-  pinMode(19,OUTPUT);
-  digitalWrite(19,LOW);
+  myservo.attach( 25 );
+  pinMode( 19,OUTPUT );
+  digitalWrite( 19,LOW );
 
   //RGB LED SETUP
-  pinMode(RED, OUTPUT);
-  pinMode(GREEN, OUTPUT);
-  pinMode(BLUE, OUTPUT);
-  digitalWrite(RED, HIGH);
-  digitalWrite(GREEN, LOW);
-  digitalWrite(BLUE, LOW);
+  pinMode( RED, OUTPUT );
+  pinMode( GREEN, OUTPUT );
+  pinMode( BLUE, OUTPUT );
+  digitalWrite( RED, HIGH );
+  digitalWrite( GREEN, LOW );
+  digitalWrite( BLUE, LOW );
   int redValue = 255; // choose a value between 1 and 255 to change the color.
   int greenValue = 0;
   int blueValue = 0;
@@ -106,9 +113,9 @@ void setup() {
   //SETUP CONNECTION
   WiFi.begin(NOME_RETE, PASSWORD);
   Serial.println("Connecting");
-  while(WiFi.status() != WL_CONNECTED) {
+  while( WiFi.status() != WL_CONNECTED ) {
     Serial.print(".");
-    for(int i = 0; i < 255; i += 1){ // fades out red bring green full when i=255 
+    for( int i = 0; i < 255; i += 1 ){ // fades out red bring green full when i=255 
       redValue -= 1;
       blueValue += 1;
       analogWrite(RED, redValue);
@@ -116,7 +123,7 @@ void setup() {
       delay(DELAYTIME);
     }
     delay(500);
-    for(int i = 0; i < 255; i += 1){ // fades out red bring green full when i=255
+    for( int i = 0; i < 255; i += 1 ){ // fades out red bring green full when i=255
       blueValue -= 1;
       redValue += 1;
       analogWrite(RED, redValue);
@@ -124,8 +131,8 @@ void setup() {
       delay(DELAYTIME);
     }
   }
-  if(WiFi.status() == WL_CONNECTED) {
-    for(int i = 0; i < 255; i += 1){ // fades out red bring green full when i=255
+  if( WiFi.status() == WL_CONNECTED ) {
+    for( int i = 0; i < 255; i += 1 ){ // fades out red bring green full when i=255
       redValue -= 1;
       greenValue += 1;
       analogWrite(RED, redValue);
@@ -138,6 +145,7 @@ void setup() {
   Serial.print("Connected to WiFi network with IP Address: ");
   Serial.println(WiFi.localIP());
  
+  //TODO togliere print inutili
   Serial.println("Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
 
   //init and get the time
@@ -152,7 +160,7 @@ void loop() {
   JSONVar jTime = currentTime;
   
   //Send an HTTP GET request
-  if ((millis() - lastTime) > timerDelay) {
+  if ( (millis() - lastTime) > timerDelay ) {
     //Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED){
       optionReadings = httpGETRequest(SERVER_OPTIONS, device);
@@ -183,19 +191,23 @@ void loop() {
           controlSize.value = myOptions[keys[i]];
       }
 
-       //setting delay based on pet's size
-      if(controlSize.value == possibleValues[1])
-        retard = 2000;
-      if(controlSize.value == possibleValues[2])
+
+      //setting delay based on pet's size
+      //TODO: rimuovere numero magico; controllare che stampi il ritardo giusto per l'apertura del motore      
+      retard = int(controlSize.value);
+      /*if(controlSize.value == switchStatus[1])
+        retard = 1500;
+      if(controlSize.value == switchStatus[2])
         retard = 4000;
-      if(controlSize.value == possibleValues[3])
-        retard = 5500;
+      if(controlSize.value == switchStatus[3])
+        retard = 5500;*/
         
 
       Serial.print("ritardo:");
       Serial.println(retard);
-
-      Serial.print("Switch Cibo:");
+      
+  //TODO togliere print inutili
+      /*Serial.print("Switch Cibo:");
       Serial.println(controlFoodSwc.value);
 
       Serial.print("impostazione Taglia:");
@@ -205,15 +217,15 @@ void loop() {
       Serial.println(controlFoodBtn.value);
 
       Serial.print("Switch uscita:");
-      Serial.println(controlWalkSwc.value);
-      
+      Serial.println(controlWalkSwc.value);*/
+  
       if(retard != 0){       //doesn't give food if the size is not set 
-        if(controlFoodBtn.value == possibleValues[1]){                //gives food if the button "food" is pressed
+        if(controlFoodBtn.value == switchStatus[1]){                //gives food if the button "food" is pressed
           giveFood(retard); 
           String httpRequestData = "id=103&state=0&"+device;
           httpPOSTRequest(SERVER_OPTIONS_POST, httpRequestData);
         }
-        else if(controlFoodSwc.value == possibleValues[1]){          //gives food (based on times) only if the switch is ON
+        else if(controlFoodSwc.value == switchStatus[1]){          //gives food (based on times) only if the switch is ON
           timeReadings = httpGETRequest(SERVER_TIMES, device);
           JSONVar myTimes = JSON.parse(timeReadings);
   
@@ -232,7 +244,7 @@ void loop() {
           }
           if(foodFlag == 0){                      //if foodFlag = 1 the food has already been given
             for(int i=0 ; i<5; i++){
-              if(jTime == timeFoodArr[i]){    //gives food based on times
+              if(jTime == timeFoodArr[i]){        //gives food based on times
                   giveFood(retard);
                   foodFlag = 1;
               }
@@ -247,7 +259,7 @@ void loop() {
         }
       }
       
-      if(controlWalkSwc.value == possibleValues[1]){      //walk switch active
+      if(controlWalkSwc.value == switchStatus[1]){      //walk switch active
         timeReadings = httpGETRequest(SERVER_WALKS, device);
         JSONVar myTimes = JSON.parse(timeReadings);
 

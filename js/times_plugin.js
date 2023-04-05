@@ -15,7 +15,7 @@
       $openButton.on("click", function(){
         let $field = $this.find(".newTimes");
         var count = $field.find("div.time").length;
-        if( count<5 ){
+        if( count<5 && $this.hasClass('food')){
           $addButton.removeClass('avoid-clicks');
           $addButton.removeClass('disabled');
         }
@@ -33,7 +33,7 @@
       $addButton.on("click", function () {
         let $field = $this.find(".newTimes");
         var count = $field.find("div.time").length;
-        if (count == 5) {
+        if (count == 5 && $this.hasClass('food')) {
           $(this).addClass('avoid-clicks');
           $(this).addClass('disabled');
           alert("Non puoi programmare più di 5 pasti");
