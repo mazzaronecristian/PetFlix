@@ -16,19 +16,21 @@
 //CASA-AREZZO WI-FI
 //#define NOME_RETE "FASTWEB-94ACB9" 
 //#define PASSWORD "TZPRC4KYK1"
-//iphone WI-FI
+//iphone
 //#define NOME_RETE "iPhone di Gianluca"
 //#define PASSWORD "paranoia"
-//Cell Cristian WI-FI
+//Cell Cristian
 #define NOME_RETE "Galaxy di Cristian"
 #define PASSWORD "seai5516"
 
-#define SERVER_TIMES "http://petflix.altervista.org/server/actionsArduino.php"
-#define SERVER_OPTIONS "http://petflix.altervista.org/server/actionsOptionsArduino.php"
+
+
+#define SERVER_TIMES "http://petflix.altervista.org/server/actionsArduino.php?device=8800"
+#define SERVER_OPTIONS "http://petflix.altervista.org/server/actionsOptionsArduino.php?device=8800"
 #define SERVER_OPTIONS_POST "http://petflix.altervista.org/server/actionsOptionsArduinoPOST.php"
-#define SERVER_WALKS "http://petflix.altervista.org/server/actionsWalksArduino.php"
+#define SERVER_WALKS "http://petflix.altervista.org/server/actionsWalksArduino.php?device=8800"
 #define NTP_SERVER "it.pool.ntp.org"
-#define GMT 3600 //GMT +1.00
+#define GMT 7200 //GMT +1.00
 #define DAYLIGHT 0
 
 //3 seconds WDT
@@ -45,8 +47,6 @@ int duration = 400;  // 400 miliseconds
 Servo myservo;  // create servo object to control a servo
 
 void giveFood(int retard) {
-  //TODO togliere print inutili
-  Serial.println( "EROGAZIONE CIBO!!!" );
   for (int pos = 0; pos <= 120; pos += 1) { // goes from 0 degrees to 120 degrees
     // in steps of 1 degree
     myservo.write(pos);              // tell servo to go to position in variable 'pos'
@@ -86,11 +86,7 @@ OptionsReadings controlFoodSwc= {"impostazione102", "1"};
 OptionsReadings controlFoodBtn = {"impostazione103", "0"};
 OptionsReadings controlWalkSwc= {"impostazione202", "1"};
 
-
-//TODO controllare che switchStatus vada bene scritto così
-JSONVar switchStatus[] = {"0", "1"};
-
-//JSONVar switchStatus[] = {"0", "1", "2", "3"};
+JSONVar switchStatus[] = {0, 1};
 
 void setup() {
   Serial.begin( 115200 );
@@ -111,10 +107,11 @@ void setup() {
   int blueValue = 0;
 
   //SETUP CONNECTION
-  WiFi.begin(NOME_RETE, PASSWORD);
-  Serial.println("Connecting");
+  WiFi.begin( NOME_RETE, PASSWORD );
+  Serial.println( "Connecting to " );
+  Serial.println( NOME_RETE );
   while( WiFi.status() != WL_CONNECTED ) {
-    Serial.print(".");
+    Serial.print( "." );
     for( int i = 0; i < 255; i += 1 ){ // fades out red bring green full when i=255 
       redValue -= 1;
       blueValue += 1;
@@ -142,17 +139,14 @@ void setup() {
   }
   
   Serial.println("");
-  Serial.print("Connected to WiFi network with IP Address: ");
+  Serial.print("Connected to WiFi network: ");
+  Serial.print( NOME_RETE );
+  Serial.print(" with IP Address: ");
   Serial.println(WiFi.localIP());
  
-  //TODO togliere print inutili
-  Serial.println("Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
-
   //init and get the time
   configTime(GMT, DAYLIGHT, NTP_SERVER); 
-  
 }
-
 
 void loop() {
   
@@ -163,12 +157,12 @@ void loop() {
   if ( (millis() - lastTime) > timerDelay ) {
     //Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED){
-      optionReadings = httpGETRequest(SERVER_OPTIONS, device);
+      optionReadings = httpGETRequest(SERVER_OPTIONS);
 
       JSONVar myOptions = JSON.parse(optionReadings);
 
       //Delay based on pet's size
-      int retard =0;
+      int retard = 0;
   
       // JSON.typeof(jsonVar) can be used to get the type of the var
       if (JSON.typeof(myOptions) == "undefined") {
@@ -191,42 +185,17 @@ void loop() {
           controlSize.value = myOptions[keys[i]];
       }
 
-
       //setting delay based on pet's size
-      //TODO: rimuovere numero magico; controllare che stampi il ritardo giusto per l'apertura del motore      
-      retard = int(controlSize.value);
-      /*if(controlSize.value == switchStatus[1])
-        retard = 1500;
-      if(controlSize.value == switchStatus[2])
-        retard = 4000;
-      if(controlSize.value == switchStatus[3])
-        retard = 5500;*/
-        
-
-      Serial.print("ritardo:");
-      Serial.println(retard);
-      
-  //TODO togliere print inutili
-      /*Serial.print("Switch Cibo:");
-      Serial.println(controlFoodSwc.value);
-
-      Serial.print("impostazione Taglia:");
-      Serial.println(controlSize.value);
-
-      Serial.print("Imp. Bottone:");
-      Serial.println(controlFoodBtn.value);
-
-      Serial.print("Switch uscita:");
-      Serial.println(controlWalkSwc.value);*/
-  
+      retard = (int)controlSize.value;
+              
       if(retard != 0){       //doesn't give food if the size is not set 
         if(controlFoodBtn.value == switchStatus[1]){                //gives food if the button "food" is pressed
           giveFood(retard); 
-          String httpRequestData = "id=103&state=0&"+device;
+          String httpRequestData = "id=103&state=0&device=8800";
           httpPOSTRequest(SERVER_OPTIONS_POST, httpRequestData);
         }
         else if(controlFoodSwc.value == switchStatus[1]){          //gives food (based on times) only if the switch is ON
-          timeReadings = httpGETRequest(SERVER_TIMES, device);
+          timeReadings = httpGETRequest(SERVER_TIMES);
           JSONVar myTimes = JSON.parse(timeReadings);
   
           // JSON.typeof(jsonVar) can be used to get the type of the var
@@ -237,7 +206,7 @@ void loop() {
     
           // myTimes.keys() can be used to get an array of all the keys in the object
           keys = myTimes.keys();
-    
+                    
           for (int i = 0; i < keys.length(); i++) {
             JSONVar value = myTimes[keys[i]];
             timeFoodArr[i] = value;       
@@ -260,7 +229,7 @@ void loop() {
       }
       
       if(controlWalkSwc.value == switchStatus[1]){      //walk switch active
-        timeReadings = httpGETRequest(SERVER_WALKS, device);
+        timeReadings = httpGETRequest(SERVER_WALKS);
         JSONVar myTimes = JSON.parse(timeReadings);
 
         // JSON.typeof(jsonVar) can be used to get the type of the var
@@ -271,16 +240,17 @@ void loop() {
   
         // myTimes.keys() can be used to get an array of all the keys in the object
         keys = myTimes.keys();
-  
-        for (int i = 0; i < keys.length(); i++) {
+
+        for ( int i = 0; i < keys.length(); i++ ) {
           JSONVar value = myTimes[keys[i]];
           timeWalkArr[i] = value;
         }
-        if(soundFlag==0)
+
+        if ( soundFlag==0 )
           for(int i=0 ; i<10; i++){
             if(jTime == timeWalkArr[i]){    //plays melody "b" times based on times
               int b = 2;
-              //while(b!= 0){
+              while(b!= 0){
                 for (int thisNote = 0; thisNote < 14; thisNote++) {
                   // pin5 output the voice, every scale is 0.5 second
                   tone(19, melody[thisNote], duration);
@@ -289,7 +259,7 @@ void loop() {
                 }
                 b--;
                 delay(500);              
-                //}
+              }
               soundFlag = 1;
               esp_task_wdt_init(WDT_TIMEOUT, true); //enable panic so ESP32 restarts
               esp_task_wdt_add(NULL); //add current thread to WDT watch
@@ -314,11 +284,10 @@ void loop() {
   }
 }
 
-
 void httpPOSTRequest(const char* serverName, String httpRequestData) {
   WiFiClient client;
   HTTPClient http;
-    
+  
   // Your Domain name with URL path or IP address with path
   http.begin(client, serverName);
 
@@ -329,13 +298,11 @@ void httpPOSTRequest(const char* serverName, String httpRequestData) {
   http.end(); //free resources
 }
 
-String httpGETRequest(const char* serverName, String httpRequestData) {
+String httpGETRequest(const char* serverName) {
   WiFiClient client;
   HTTPClient http;
 
-  //Domain for the request with GET DATAS
-  httpRequestData = "?"+httpRequestData;
-  String serverPath = serverName + httpRequestData;
+  String serverPath = serverName;
   
   // Your Domain name with URL path or IP address with path
   http.begin(client, serverName);
