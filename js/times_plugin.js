@@ -10,7 +10,12 @@
       load_pop_up($this);
       let $addButton = $(".add", $this);
       let $closeButton = $(".close-button", $this);
-      let $openButton = $(".open-popup", $this);
+      let $openButton = $(".open-popup", $(document));
+
+      $openButton.each(function () {
+        if (this.dataset.modalTarget == $this.attr("id"))
+          $openButton = $(this);
+      });
 
       $openButton.on("click", function(){
         let $field = $this.find(".newTimes");
@@ -208,9 +213,10 @@
     function load_pop_up($el) {
       var classList = $el.attr("class");
       var classArr = classList.split(" ");
+      console.log("🚀 ~ file: times_plugin.js:215 ~ load_pop_up ~ classArr[0]:", classArr[0]);
       let html =
-      '<div class="popup-parent">'+
-        '<button data-modal-target="#modalFood" class="edit open open-popup"><i class="fa-solid fa-pencil"></i></button>';
+      '<div data-modal-target="modal-'+classArr[0]+'" class="popup-parent">'+
+        '<button id="modal-'+classArr[0]+'" class="edit open open-popup"><i class="fa-solid fa-pencil"></i></button>';
       html +=
         '<div class="modal">' +
         '<div class="modal-header">' +
